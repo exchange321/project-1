@@ -1,14 +1,16 @@
 /**
  * Created by Wayuki on 24-Mar-17.
  */
-import React, { PropTypes } from 'react';
+import React from 'react';
+
+import SearchBar from './searchBar/index.jsx';
+import SearchResults from './searchResults/index.jsx';
 
 const SearchPage = () => (
-  <div className="container">
-    This is SearchPage
+  <div className="container search">
+    <SearchBar />
+    <SearchResults />
   </div>
 );
-
-SearchPage.propTypes = {};
 
 export default SearchPage;
