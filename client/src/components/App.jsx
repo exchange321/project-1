@@ -11,7 +11,7 @@ import NotFoundPage from './404/NotFoundPage.jsx';
 
 const App = () => {
   return (
-    <div className="home">
+    <div className="app-container">
       <Switch>
         <Route exact path="/" component={SearchPage} />
         <Route exact path="/login" component={LoginPage} />

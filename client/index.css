@@ -17,8 +17,28 @@ body {
   font-family: 'Roboto', Arial, sans-serif;
 }
 
-div.home {
+/* CONTAINER - START */
+
+div.app-container {
   min-height: 100vh;
   background-color: rgb(48, 48, 48);
   color: white;
+  position: relative;
 }
+
+/* CONTAINER - END */
+
+/* 404 - START */
+
+div.not-found {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+/* 404 - END */
