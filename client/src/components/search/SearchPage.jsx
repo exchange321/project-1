@@ -4,7 +4,9 @@
 import React, { PropTypes } from 'react';
 
 const SearchPage = () => (
-  <div>This is SearchPage</div>
+  <div className="container">
+    This is SearchPage
+  </div>
 );
 
 SearchPage.propTypes = {};

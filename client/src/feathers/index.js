@@ -6,7 +6,7 @@ import reduxifyAuthentication from 'feathers-reduxify-authentication';
 import rx from 'feathers-reactive';
 import RxJS from 'rxjs';
 
-const socket = io();
+const socket = io(); // eslint-disable-line no-undef
 
 const app = feathers()
   .configure(feathers.socketio(socket))

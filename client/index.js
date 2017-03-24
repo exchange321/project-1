@@ -7,9 +7,9 @@ import { render } from 'react-dom';
 
 import './index.css';
 
-import AppEntry from './src/AppEntry.jsx';
+import AppEntry from './src/AppEntry.jsx'; // eslint-disable-line import/extensions
 
-window.jQuery = window.$ = require('jquery');
+window.jQuery = window.$ = require('jquery'); // eslint-disable-line no-multi-assign
 window.Tether = require('tether');
 require('bootstrap');
 

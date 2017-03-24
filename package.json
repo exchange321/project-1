@@ -23,6 +23,7 @@
     "lint:fix": "node_modules/.bin/eslint client --fix"
   },
   "dependencies": {
+    "babel-polyfill": "^6.23.0",
     "bootstrap": "4.0.0-alpha.6",
     "colors": "^1.1.2",
     "compression": "^1.6.2",
@@ -38,6 +39,7 @@
     "feathers-reduxify-authentication": "^0.1.1",
     "feathers-socketio": "^1.5.2",
     "fontawesome": "^4.7.2",
+    "history": "^4.6.1",
     "jquery": "^3.2.1",
     "mongoose": "^4.9.1",
     "passport": "^0.3.2",
@@ -71,7 +73,6 @@
     "babel-eslint": "^7.2.1",
     "babel-loader": "^6.4.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-polyfill": "^6.23.0",
     "babel-preset-es2015": "^6.24.0",
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-0": "^6.22.0",
