@@ -6,10 +6,14 @@
 - [ ] Initialization
     - [x] Initialize Backend
     - [x] Initialize Frontend
+    - [ ] Basic App Frame
+        - [x] SearchPage
 
 ## Todos
 - [ ] **Initialization**
     - [ ] **Basic App Frame**
+        - [ ] **VideoPage**
+        - [ ] LoginPage
 - [ ] General Functions
     - [ ] User Authentication
     - [ ] Page Authorization
