@@ -10,11 +10,12 @@
         - [x] SearchPage
         - [x] VideoPage
         - [x] LoginPage
+- [ ] General Functions
+    - [x] User Authentication (Google and Facebook)
+    - [x] Page and Element Authorization
 
 ## Todos
 - [ ] General Functions
-    - [ ] **User Authentication**
-    - [ ] Page Authorization
     - [ ] WCAG 2.0
     - [ ] On-Screen Instructions
     - [ ] Eye-Tracking Functions
