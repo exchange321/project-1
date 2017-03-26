@@ -4,13 +4,14 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
-import { feathersAuthentication } from '../feathers';
-
+import auth from './authReducer';
+import sidebar from './sidebarReducer';
 import searchPage from './searchPageReducer';
 
 const rootReducer = combineReducers({
+  auth,
+  sidebar,
   searchPage,
-  auth: feathersAuthentication.reducer,
   routing: routerReducer,
 });
 

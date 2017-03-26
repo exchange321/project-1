@@ -4,7 +4,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 
-import { feathersAuthentication } from './feathers';
+import * as authActions from './actions/authActions';
 import configureStore from './store/configureStore';
 
 import AppRoutes from './AppRoutes.jsx';
@@ -12,9 +12,7 @@ import AppRoutes from './AppRoutes.jsx';
 const store = configureStore();
 
 if (localStorage['feathers-jwt']) {
-  store.dispatch(feathersAuthentication.authenticate()).catch((err) => {
-    return err;
-  });
+  store.dispatch(authActions.authenticate());
 }
 
 const AppEntry = () => (

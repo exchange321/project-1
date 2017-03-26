@@ -2,7 +2,6 @@
  * Created by Wayuki on 24-Mar-17.
  */
 import feathers from 'feathers-client';
-import reduxifyAuthentication from 'feathers-reduxify-authentication';
 import rx from 'feathers-reactive';
 import RxJS from 'rxjs';
 
@@ -17,7 +16,3 @@ const app = feathers()
   }));
 
 export default app;
-
-export const feathersAuthentication = reduxifyAuthentication(app, {
-  isUserAuthorized: user => user.isVerified,
-});

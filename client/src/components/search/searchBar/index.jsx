@@ -4,8 +4,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { routerActions } from 'react-router-redux';
 
 import * as searchPageActions from '../../../actions/searchPageActions';
+
+import { ElementForUserOnly } from '../../../auth';
 
 @connect(
   ({ searchPage: { query, results } }) => ({
@@ -14,14 +17,23 @@ import * as searchPageActions from '../../../actions/searchPageActions';
   }),
   dispatch => ({
     actions: bindActionCreators(searchPageActions, dispatch),
+    routerActions: bindActionCreators(routerActions, dispatch),
   })
 )
+@ElementForUserOnly
 class SearchBar extends Component {
   static propTypes = {
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
+    }).isRequired,
     query: PropTypes.string.isRequired,
     numResults: PropTypes.number.isRequired,
     actions: PropTypes.shape({
       handleQueryChange: PropTypes.func.isRequired,
+      handleQuerySubmit: PropTypes.func.isRequired,
+    }).isRequired,
+    routerActions: PropTypes.shape({
+      push: PropTypes.func.isRequired,
     }).isRequired,
   };
 
@@ -34,6 +46,26 @@ class SearchBar extends Component {
     this.props.actions.handleQueryChange(value);
   };
 
+  handleQuerySubmit = (e) => {
+    e.preventDefault();
+    const {
+      location: {
+        pathname,
+      },
+      actions: {
+        handleQuerySubmit,
+      },
+      routerActions: {
+        push,
+      },
+    } = this.props;
+    handleQuerySubmit().then(() => {
+      if (pathname !== '/') {
+        push('/');
+      }
+    }).catch(() => {});
+  };
+
   render() {
     const {
       query,
@@ -43,7 +75,7 @@ class SearchBar extends Component {
     return (
       <div className={`search-bar-container ${(numResults > 0 || location.pathname !== '/') ? 'has-results' : ''}`}>
           <div className="search-bar container">
-            <form>
+            <form onSubmit={this.handleQuerySubmit}>
               <div className="search-bar-inner input-group">
                 <span className="input-group-addon">How to</span>
                 <input

@@ -8,6 +8,8 @@ const cors = require('cors');
 const feathers = require('feathers');
 const configuration = require('feathers-configuration');
 const hooks = require('feathers-hooks');
+const rest = require('feathers-rest');
+const bodyParser = require('body-parser');
 const socketio = require('feathers-socketio');
 const middleware = require('./middleware');
 const services = require('./services');
@@ -31,12 +33,15 @@ app.use(compress())
   .options('*', cors())
   .use(cors())
   .use(favicon( path.join(app.get('assets'), 'favicon.ico') ))
-  .get('/', serveHtml)
   .use('/', serveStatic(app.get('public')))
   .use('/assets', serveStatic(app.get('assets')))
   .use('/login', serveHtml)
+  .use('/logout', serveHtml)
   .use('/video', serveHtml)
+  .use(bodyParser.json())
+  .use(bodyParser.urlencoded({ extended: true }))
   .configure(hooks())
+  .configure(rest())
   .configure(socketio())
   .configure(services)
   .configure(middleware);
