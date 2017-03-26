@@ -3,19 +3,17 @@
 ## Message
 
 ## Finished
-- [ ] Initialization
+- [x] Initialization
     - [x] Initialize Backend
     - [x] Initialize Frontend
-    - [ ] Basic App Frame
+    - [x] Basic App Frame
         - [x] SearchPage
+        - [x] VideoPage
+        - [x] LoginPage
 
 ## Todos
-- [ ] **Initialization**
-    - [ ] **Basic App Frame**
-        - [ ] **VideoPage**
-        - [ ] LoginPage
 - [ ] General Functions
-    - [ ] User Authentication
+    - [ ] **User Authentication**
     - [ ] Page Authorization
     - [ ] WCAG 2.0
     - [ ] On-Screen Instructions
