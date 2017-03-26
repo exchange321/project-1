@@ -5,6 +5,9 @@ import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'toastr/build/toastr.min.css';
+import 'font-awesome/css/font-awesome.min.css';
 import './index.css';
 
 import AppEntry from './src/AppEntry.jsx'; // eslint-disable-line import/extensions

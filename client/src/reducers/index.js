@@ -6,7 +6,10 @@ import { routerReducer } from 'react-router-redux';
 
 import { feathersAuthentication } from '../feathers';
 
+import searchPage from './searchPageReducer';
+
 const rootReducer = combineReducers({
+  searchPage,
   auth: feathersAuthentication.reducer,
   routing: routerReducer,
 });

@@ -9,14 +9,17 @@ import VideoPage from './video/VideoPage.jsx';
 import LoginPage from './login/LoginPage.jsx';
 import NotFoundPage from './404/NotFoundPage.jsx';
 
+import SearchBar from "./search/searchBar/index.jsx";
+
 const App = ({ location }) => {
   return (
     <div className="app-container">
+      { location.pathname !== '/login' ? <SearchBar location={location} /> : '' }
       <Switch>
-        <Route location={location} exact path="/" component={SearchPage} />
+        <Route exact path="/" component={SearchPage} />
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/video" component={VideoPage} />
-        <Route location={location} exact path="/404" component={NotFoundPage} />
+        <Route exact path="/404" component={NotFoundPage} />
         <Redirect to="/404" />
       </Switch>
     </div>

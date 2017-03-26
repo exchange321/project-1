@@ -1,0 +1,9 @@
+/**
+ * Created by Wayuki on 25-Mar-17.
+ */
+export const SEARCH_PAGE_ACTIONS = {
+  HANDLE_QUERY_CHANGE: 'HANDLE_SEARCH_PAGE_QUERY_CHANGE',
+  REGISTER_QUERY_RESULTS: 'REGISTER_SEARCH_PAGE_QUERY_RESULTS',
+};
+
+export default {};

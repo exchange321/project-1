@@ -3,12 +3,10 @@
  */
 import React from 'react';
 
-import SearchBar from './searchBar/index.jsx';
 import SearchResults from './searchResults/index.jsx';
 
 const SearchPage = () => (
-  <div className="container search">
-    <SearchBar />
+  <div className="search container">
     <SearchResults />
   </div>
 );
