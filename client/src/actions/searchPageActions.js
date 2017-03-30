@@ -18,8 +18,9 @@ export const handleQueryChange = value => (
 );
 
 export const handleQuerySubmit = () => (
-  (dispatch, getState) => new Promise((resolve, reject) => {
+  (dispatch, getState) => new Promise((resolve) => {
     const { query } = getState().searchPage;
+    const videos = ['', '', '', '', ''];
     const results = [];
     if (query.length > 0) {
       for (let i = 0; i < 5; i += 1) {

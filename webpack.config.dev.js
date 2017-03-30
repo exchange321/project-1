@@ -6,6 +6,7 @@ const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 module.exports = {
   devtool: 'source-map',
   entry: [
+    'whatwg-fetch',
     'webpack-hot-middleware/client?reload=true',
     `${__dirname}/client/index.js`,
   ],

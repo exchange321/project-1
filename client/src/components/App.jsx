@@ -35,7 +35,7 @@ const App = ({ location }) => {
           <Route exact path="/login/failure" render={() => (
             <LoginPage success={false} />
           )} />
-          <Route exact path="/video" component={PageForUserOnly(VideoPage)} />
+          <Route exact path="/watch" component={PageForUserOnly(VideoPage)} />
           <Route exact path="/404" component={NotFoundPage} />
           <Redirect to="/404" />
         </Switch>

@@ -28,7 +28,7 @@ class SearchResults extends Component {
   };
 
   handleSearchResultClick = () => {
-    this.props.routerActions.push('/video');
+    this.props.routerActions.push('/watch');
   };
 
   render() {

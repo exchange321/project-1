@@ -5,6 +5,7 @@ import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import Promise from 'promise-polyfill';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'toastr/build/toastr.min.css';
@@ -18,5 +19,9 @@ window.Tether = require('tether');
 require('bootstrap');
 
 injectTapEventPlugin();
+
+if (!window.Promise) {
+  window.Promise = Promise;
+}
 
 render(React.createElement(AppEntry), document.querySelector('#app'));

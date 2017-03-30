@@ -26,6 +26,31 @@ body {
 /* LIBRARY - START */
 
 :root {
+  --theme-color: rgb(48, 48, 48);
+  --theme-color-2: rgb(60, 60, 60);
+  --thumbnail-color: #aaa;
+  --font-color: white;
+  --google-color: #008744;
+  --facebook-color: #3b5998;
+  --scale: {
+    -webkit-transform: scale(1.03);
+    -moz-transform: scale(1.03);
+    -ms-transform: scale(1.03);
+    -o-transform: scale(1.03);
+    transform: scale(1.03);
+  };
+  --box-shadow: {
+    -webkit-box-shadow: 0 0 1rem 0 var(--font-color);
+    -moz-box-shadow: 0 0 1rem 0 var(--font-color);
+    box-shadow: 0 0 1rem 0 var(--font-color);
+  };
+  --transition-all: {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+  };
   --vertical-center: {
     position: absolute;
     top: 50%;
@@ -53,8 +78,8 @@ body {
 
 div.app-container {
   min-height: 100vh;
-  background-color: rgb(48, 48, 48);
-  color: white;
+  background-color: var(--theme-color);
+  color: var(--font-color);
   position: relative;
   padding-bottom: 3rem;
 }
@@ -70,10 +95,10 @@ div.sidebar {
   left: 3rem;
   & button.btn-toggle {
     background-color: transparent;
-    color: white;
+    color: var(--font-color);
     &:hover {
-      background-color: white;
-      color: rgb(48, 48, 48);
+      background-color: var(--font-color);
+      color: var(--theme-color);
     }
   }
   & i.fa {
@@ -92,12 +117,8 @@ div.search-bar-container {
   left: 0;
   height: 100%;
   z-index: 10;
-  background-color: rgb(48, 48, 48);
-  -webkit-transition: all .3s;
-  -moz-transition: all .3s;
-  -ms-transition: all .3s;
-  -o-transition: all .3s;
-  transition: all .3s;
+  background-color: var(--theme-color);
+  @apply (--transition-all);
   &.has-results {
     height: 6.5rem;
     & .search-bar {
@@ -127,27 +148,17 @@ div.search-result-container {
     z-index: 1;
     overflow: hidden;
     padding: 15px;
-    background-color: rgb(48, 48, 48);
-    -webkit-transition: all .3s;
-    -moz-transition: all .3s;
-    -ms-transition: all .3s;
-    -o-transition: all .3s;
-    transition: all .3s;
+    background-color: var(--theme-color);
     border-radius: 5px;
+    @apply (--transition-all);
     @media (--md-only) {
       width: 50%;
       float: left;
     }
     &:hover {
+      @apply (--scale);
+      @apply (--box-shadow);
       z-index: 2;
-      -webkit-box-shadow: 0 0 1rem 0 white;
-      -moz-box-shadow: 0 0 1rem 0 white;
-      box-shadow: 0 0 1rem 0 white;
-      -webkit-transform: scale(1.03);
-      -moz-transform: scale(1.03);
-      -ms-transform: scale(1.03);
-      -o-transform: scale(1.03);
-      transform: scale(1.03);
       cursor: pointer;
     }
     & .thumbnail {
@@ -156,7 +167,7 @@ div.search-result-container {
         flex-direction: column;
         &:after {
           content: '';
-          background-color: #aaa;
+          background-color: var(--thumbnail-color);
           flex: 1;
         }
       } @media (--xs-md) {
@@ -167,7 +178,7 @@ div.search-result-container {
         max-width: 21.25rem;
         margin: 0 auto;
         height: 12rem;
-        background-color: #aaa;
+        background-color: var(--thumbnail-color);
       }
     }
     }
@@ -194,7 +205,7 @@ div.video {
   & .video-playback-container {
     background-color: black;
     & .video-tag {
-      background-color: #333;
+      background-color: var(--thumbnail-color);
       width: 100%;
       position: relative;
       &:after {
@@ -207,14 +218,12 @@ div.video {
   & #video-accordion {
     padding-top: 2rem;
     & .cards {
-      -webkit-box-shadow: 0 0 1rem 0 white;
-      -moz-box-shadow: 0 0 1rem 0 white;
-      box-shadow: 0 0 1rem 0 white;
+      @apply (--box-shadow);
       border-radius: 5px;
       & .card {
         background-color: transparent;
         & .card-header {
-          background-color: rgb(60, 60, 60);
+          background-color: var(--theme-color-2);
         }
       }
     }
@@ -232,7 +241,7 @@ div.video {
           content: '';
           padding-top: 56.25%;
           display: block;
-          background-color: #aaa;
+          background-color: var(--thumbnail-color);
         }
       }
     }
@@ -260,21 +269,13 @@ div.login-container {
         color: white;
         position: relative;
         z-index: 1;
-        -webkit-transition: transform .3s;
-        -moz-transition: transform .3s;
-        -ms-transition: transform .3s;
-        -o-transition: transform .3s;
-        transition: transform .3s;
+        @apply (--transition-all);
         &:first-child {
           margin-bottom: 1rem;
         }
         &:hover {
           z-index: 2;
-          -webkit-transform: scale(1.03);
-          -moz-transform: scale(1.03);
-          -ms-transform: scale(1.03);
-          -o-transform: scale(1.03);
-          transform: scale(1.03);
+          @apply (--scale);
         }
         &:before {
           font-family: FontAwesome;
@@ -286,21 +287,21 @@ div.login-container {
           text-align: center;
         }
         &.google-login-link {
-          border: 2px solid #008744;
-          background-color: #008744;
-          -webkit-box-shadow: 0 0 1rem 0 #008744;
-          -moz-box-shadow: 0 0 1rem 0 #008744;
-          box-shadow: 0 0 1rem 0 #008744;
+          border: 2px solid var(--google-color);
+          background-color: var(--google-color);
+          -webkit-box-shadow: 0 0 1rem 0 var(--google-color);
+          -moz-box-shadow: 0 0 1rem 0 var(--google-color);
+          box-shadow: 0 0 1rem 0 var(--google-color);
           &:before {
             content: "\f1a0";
           }
         }
         &.facebook-login-link {
-          border: 2px solid #3b5998;
-          background-color: #3b5998;
-          -webkit-box-shadow: 0 0 1rem 0 #3b5998;
-          -moz-box-shadow: 0 0 1rem 0 #3b5998;
-          box-shadow: 0 0 1rem 0 #3b5998;
+          border: 2px solid var(--facebook-color);
+          background-color: var(--facebook-color);
+          -webkit-box-shadow: 0 0 1rem 0 var(--facebook-color);
+          -moz-box-shadow: 0 0 1rem 0 var(--facebook-color);
+          box-shadow: 0 0 1rem 0 var(--facebook-color);
           &:before {
             content: "\f09a";
           }

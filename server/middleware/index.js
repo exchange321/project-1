@@ -1,5 +1,7 @@
 'use strict';
 
+const video = require('./video');
+
 const handler = require('feathers-errors/handler');
 const notFound = require('./not-found-handler');
 const logger = require('./logger');
@@ -9,6 +11,7 @@ module.exports = function() {
   // just like Express the order matters, so error
   // handling middleware should go last.
   const app = this;
+  app.get('/video', video(app));
 
   app.use(notFound());
   app.use(logger(app));

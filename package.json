@@ -49,6 +49,7 @@
     "passport-facebook-token": "^3.3.0",
     "passport-google-oauth20": "^1.0.0",
     "passport-google-token": "^0.1.2",
+    "promise-polyfill": "^6.0.2",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-transition-group": "^15.4.2",
@@ -69,7 +70,9 @@
     "serve-favicon": "^2.4.1",
     "tether": "^1.4.0",
     "toastr": "^2.1.2",
-    "winston": "^2.3.1"
+    "whatwg-fetch": "^2.0.3",
+    "winston": "^2.3.1",
+    "youtube-dl": "^1.11.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.0",
