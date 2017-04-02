@@ -13,6 +13,9 @@
 - [ ] General Functions
     - [x] User Authentication (Google and Facebook)
     - [x] Page and Element Authorization
+- [ ] Video Functions
+    - [ ] Note-taking
+        - [x] Download Video on Server
 
 ## Todos
 - [ ] General Functions
@@ -32,7 +35,6 @@
     - [ ] Initialize Video Playback
     - [ ] Video Controls
     - [ ] Note-taking
-        - [ ] Download Video on Server
         - [ ] Stream Video from Server
         - [ ] Frame Capture
         - [ ] Input Notes
