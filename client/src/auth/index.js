@@ -12,6 +12,9 @@ export const PageForUserOnly = UserAuthWrapper({
   redirectAction: newLoc => (dispatch) => {
     let search = '?';
     Object.keys(newLoc.query).forEach((key, index) => {
+      if (key === "redirect") {
+        window.localStorage.setItem("redirect", newLoc.query[key]);
+      }
       search += `${key}=${newLoc.query[key]}`;
       if (Object.keys(newLoc.query).length > index + 1) {
         search += '&';

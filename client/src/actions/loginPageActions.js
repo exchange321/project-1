@@ -12,8 +12,18 @@ export const handleLogin = success => (
     if (success) {
       const token = helpers.getCookieData('feathers-jwt');
       dispatch(authActions.authenticate(token)).then(() => {
-        toastr.success('You are authenticated. Redirecting to Homepage.');
-        dispatch(routerActions.replace('/'));
+        toastr.success('You are authenticated.');
+        const redirect = window.localStorage.getItem("redirect");
+        if (redirect) {
+          window.localStorage.removeItem("redirect");
+          dispatch(routerActions.replace(redirect));
+        } else {
+          if (!window.localStorage.getItem("redirected") || window.localStorage.getItem("redirected") !== "true") {
+            dispatch(routerActions.replace("/"));
+          } else {
+            window.localStorage.removeItem("redirected");
+          }
+        }
       }).catch(() => {
         toastr.error('Errors occurred when authenticating. Please try again.');
       });

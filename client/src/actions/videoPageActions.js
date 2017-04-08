@@ -22,6 +22,9 @@ export const registerVideo = videoId => (
           description: item.snippet.description,
         },
       });
+    }).catch((err) => {
+      toastr.error(err.message);
+      dispatch(routerActions.replace('/'));
     });
 
     const restLink = `${window.location.protocol}//${window.location.hostname}${window.location.port.length > 0 ? `:${window.location.port}` : ''}/video?v=${videoId}`;
