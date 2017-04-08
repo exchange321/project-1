@@ -13,6 +13,12 @@
 - [ ] General Functions
     - [x] User Authentication (Google and Facebook)
     - [x] Page and Element Authorization
+- [ ] Search Functions
+    - [ ] Search Bar
+        - [x] Initialize Search Bar
+    - [x] Search Result
+        - [x] Initialize Search Result
+        - [x] Display Information
 - [ ] Video Functions
     - [x] Initialize Video Playback
     - [x] Video Controls
@@ -27,13 +33,9 @@
     - [ ] Eye-Tracking Functions
 - [ ] Search Functions
     - [ ] Search Bar
-        - [ ] Initialize Search Bar
         - [ ] Spell Auto-suggestion
         - [ ] Emoji in Suggestions
         - [ ] Save History
-    - [ ] Search Result
-        - [ ] Initialize Search Result
-        - [ ] Display Information
 - [ ] Video Functions
     - [ ] Note-taking
         - [ ] Frame Capture
