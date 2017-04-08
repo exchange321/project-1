@@ -143,17 +143,20 @@ div.search-bar-container {
 
 div.search-result-container {
   padding-top: 7.5rem;
+  @media (--md-only) {
+    display: flex;
+    flex-wrap: wrap;
+  }
   & .search-result {
-    position: relative;
     z-index: 1;
+    position: relative;
     overflow: hidden;
     padding: 15px;
     background-color: var(--theme-color);
     border-radius: 5px;
     @apply (--transition-all);
     @media (--md-only) {
-      width: 50%;
-      float: left;
+      flex: 0 0 50%;
     }
     &:hover {
       @apply (--scale);
@@ -162,25 +165,10 @@ div.search-result-container {
       cursor: pointer;
     }
     & .thumbnail {
-      @media (--lg) {
-        display: flex;
-        flex-direction: column;
-        &:after {
-          content: '';
-          background-color: var(--thumbnail-color);
-          flex: 1;
-        }
-      } @media (--xs-md) {
-      margin-bottom: 1rem;
-      &:after {
-        content: '';
-        display: block;
-        max-width: 21.25rem;
-        margin: 0 auto;
-        height: 12rem;
-        background-color: var(--thumbnail-color);
+      text-align: center;
+      @media (--xs-md) {
+        margin-bottom: 1rem;
       }
-    }
     }
     @media (--sm-only) {
       & .result-info {

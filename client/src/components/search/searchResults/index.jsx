@@ -19,13 +19,30 @@ import SearchResult from './SearchResult.jsx';
 class SearchResults extends Component {
   static propTypes = {
     results: PropTypes.arrayOf(PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
+      id: PropTypes.shape({
+        videoId: PropTypes.string.isRequired,
+      }).isRequired,
+      snippet: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        thumbnails: PropTypes.shape({
+          medium: PropTypes.shape({
+            url: PropTypes.string.isRequired,
+          }).isRequired,
+        }).isRequired,
+      }).isRequired,
     })).isRequired,
     routerActions: PropTypes.shape({
       push: PropTypes.func.isRequired,
     }).isRequired,
   };
+
+  getInfoFromResult = result => ({
+    videoId: result.id.videoId,
+    title: result.snippet.title || "",
+    description: result.snippet.description || "",
+    thumbnail: result.snippet.thumbnails.medium.url || result.snippet.thumbnails.high.url || result.snippet.thumbnails.default.url,
+  });
 
   handleSearchResultClick = (videoId) => {
     this.props.routerActions.push(`/watch?v=${videoId}`);
@@ -36,7 +53,7 @@ class SearchResults extends Component {
     return (
       <div className="search-result-container clearfix">
         { results.map((result, key) => (
-          <SearchResult key={key} {...result} handleResultClick={this.handleSearchResultClick} />
+          <SearchResult key={key} className={`clear-${key % 2}`} {...(this.getInfoFromResult(result))} handleResultClick={this.handleSearchResultClick} />
         )) }
       </div>
     );

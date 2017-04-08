@@ -31,7 +31,12 @@ class VideoPage extends Component {
     videoId: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
     isVideoLoaded: PropTypes.bool.isRequired,
+    video: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+    }).isRequired,
     actions: PropTypes.shape({
+      pageEntered: PropTypes.func.isRequired,
       registerVideo: PropTypes.func.isRequired,
       resetVideoPage: PropTypes.func.isRequired,
     }).isRequired,
@@ -46,12 +51,14 @@ class VideoPage extends Component {
         search,
       },
       actions: {
+        pageEntered,
         registerVideo,
       },
       routerActions: {
         replace,
       },
     } = this.props;
+    pageEntered();
     const query = queryString.parse(search);
     if (!query.v || query.v.length < 1) {
       replace('/');
@@ -68,6 +75,10 @@ class VideoPage extends Component {
     const {
       src,
       isVideoLoaded,
+      video: {
+        title,
+        description,
+      },
     } = this.props;
     return (
       <div className="video">
@@ -84,10 +95,10 @@ class VideoPage extends Component {
               >
                 <div className="video-info">
                   <div className="video-title">
-                    <h1>I am Title</h1>
+                    <h1>{ title }</h1>
                   </div>
                   <div className="video-description">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam delectus dignissimos, earum esse et eum explicabo facilis harum itaque iure magni mollitia necessitatibus obcaecati officia omnis porro possimus provident quas vel! Accusantium ad aperiam assumenda autem consectetur earum error eveniet facilis, fugit in laudantium magnam maiores molestias natus, nisi odit optio pariatur perferendis porro praesentium provident quibusdam quo ratione repellat reprehenderit repudiandae saepe sed similique suscipit tempore tenetur voluptatum!</p>
+                    <p>{ description }</p>
                   </div>
                 </div>
               </AccordionCard>

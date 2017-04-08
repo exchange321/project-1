@@ -17,5 +17,10 @@ export default {
     videoId: '',
     src: '',
     isVideoLoaded: false,
+    isOnPage: false,
+    video: {
+      title: "",
+      description: "",
+    },
   },
 };

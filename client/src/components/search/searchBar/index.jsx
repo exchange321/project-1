@@ -5,6 +5,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { routerActions } from 'react-router-redux';
+import toastr from 'toastr';
 
 import * as searchPageActions from '../../../actions/searchPageActions';
 
@@ -53,6 +54,7 @@ class SearchBar extends Component {
         pathname,
       },
       actions: {
+        handleQueryChange,
         handleQuerySubmit,
       },
       routerActions: {
@@ -63,7 +65,10 @@ class SearchBar extends Component {
       if (pathname !== '/') {
         push('/');
       }
-    }).catch(() => {});
+    }).catch((err) => {
+      handleQueryChange("");
+      toastr.error(err.message);
+    });
   };
 
   render() {

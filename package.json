@@ -74,6 +74,7 @@
     "toastr": "^2.1.2",
     "whatwg-fetch": "^2.0.3",
     "winston": "^2.3.1",
+    "with-query": "^1.0.2",
     "youtube-dl": "^1.11.1"
   },
   "devDependencies": {

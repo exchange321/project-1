@@ -6,13 +6,33 @@ import { VIDEO_PAGE_ACTIONS } from '../actions/actionTypes';
 
 const videoPageReducer = (state = initialState.videoPage, action) => {
   switch (action.type) {
-    case VIDEO_PAGE_ACTIONS.REGISTER_VIDEO: {
+    case VIDEO_PAGE_ACTIONS.PAGE_ENTERED: {
       return {
         ...state,
-        videoId: action.videoId,
-        src: action.src,
-        isVideoLoaded: true,
+        isOnPage: true,
       };
+    }
+
+    case VIDEO_PAGE_ACTIONS.REGISTER_VIDEO: {
+      if (state.isOnPage) {
+        return {
+          ...state,
+          src: action.src,
+          isVideoLoaded: true,
+        };
+      }
+      return state;
+    }
+
+    case VIDEO_PAGE_ACTIONS.REGISTER_VIDEO_INFO: {
+      if (state.isOnPage) {
+        return {
+          ...state,
+          videoId: action.videoId,
+          video: action.video,
+        };
+      }
+      return state;
     }
 
     case VIDEO_PAGE_ACTIONS.RESET_VIDEO_PAGE: {
