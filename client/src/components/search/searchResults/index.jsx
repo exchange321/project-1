@@ -27,8 +27,8 @@ class SearchResults extends Component {
     }).isRequired,
   };
 
-  handleSearchResultClick = () => {
-    this.props.routerActions.push('/watch');
+  handleSearchResultClick = (videoId) => {
+    this.props.routerActions.push(`/watch?v=${videoId}`);
   };
 
   render() {

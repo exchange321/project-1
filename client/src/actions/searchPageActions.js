@@ -20,15 +20,14 @@ export const handleQueryChange = value => (
 export const handleQuerySubmit = () => (
   (dispatch, getState) => new Promise((resolve) => {
     const { query } = getState().searchPage;
-    const videos = ['', '', '', '', ''];
-    const results = [];
+    const videos = ['Qoyvu9xFJQQ&t', 'WyAg0h7uxv8', '3EJC1edU3Y4', 'WC6Xx_jLXmg', 'Yo2-Pgcmh8U', 'uYaPF5wZNEo'];
+    let results = [];
     if (query.length > 0) {
-      for (let i = 0; i < 5; i += 1) {
-        results[i] = {
-          title: query,
-          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab animi eaque harum ipsa magni obcaecati quam, quidem quos repudiandae voluptatum. Accusantium cumque debitis distinctio dolorum earum est facilis ipsum magnam molestias necessitatibus nemo nobis officia, quas quidem quos ratione veritatis voluptate. Consequuntur facilis laudantium odio sint veniam! Blanditiis, illum, quo!',
-        };
-      }
+      results = videos.map(videoId => ({
+        title: query,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab animi eaque harum ipsa magni obcaecati quam, quidem quos repudiandae voluptatum. Accusantium cumque debitis distinctio dolorum earum est facilis ipsum magnam molestias necessitatibus nemo nobis officia, quas quidem quos ratione veritatis voluptate. Consequuntur facilis laudantium odio sint veniam! Blanditiis, illum, quo!',
+        videoId,
+      }));
     }
     dispatch(registerQueryResults(results));
     resolve();

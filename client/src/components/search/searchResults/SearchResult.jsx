@@ -3,8 +3,8 @@
  */
 import React, { PropTypes } from 'react';
 
-const SearchResult = ({ title, description, handleResultClick }) => (
-  <div className="search-result clearfix" onClick={handleResultClick}>
+const SearchResult = ({ title, description, videoId, handleResultClick }) => (
+  <div className="search-result clearfix" onClick={(e) => handleResultClick(videoId)}>
     <div className="row">
       <div className="thumbnail col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-3" />
       <div className="result-info col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
@@ -22,6 +22,7 @@ const SearchResult = ({ title, description, handleResultClick }) => (
 SearchResult.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  videoId: PropTypes.string.isRequired,
   handleResultClick: PropTypes.func.isRequired,
 };
 

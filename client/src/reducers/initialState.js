@@ -13,4 +13,9 @@ export default {
     query: '',
     results: [],
   },
+  videoPage: {
+    videoId: '',
+    src: '',
+    isVideoLoaded: false,
+  },
 };

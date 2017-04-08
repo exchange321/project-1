@@ -10,9 +10,19 @@ export const PageForUserOnly = UserAuthWrapper({
   predicate: auth => auth && auth.login,
   failureRedirectPath: '/login',
   redirectAction: newLoc => (dispatch) => {
-    dispatch(routerActions.replace(newLoc));
+    let search = '?';
+    Object.keys(newLoc.query).forEach((key, index) => {
+      search += `${key}=${newLoc.query[key]}`;
+      if (Object.keys(newLoc.query).length > index + 1) {
+        search += '&';
+      }
+    });
+    const location = {
+      ...newLoc,
+      search,
+    };
+    dispatch(routerActions.replace(location));
   },
-  allowRedirectBack: false,
 });
 
 export const ElementForUserOnly = UserAuthWrapper({
@@ -27,9 +37,7 @@ export const PageForGuestOnly = UserAuthWrapper({
   authSelector: state => state.auth,
   predicate: auth => !auth.login,
   failureRedirectPath: '/',
-  redirectAction: newLoc => (dispatch) => {
-    dispatch(routerActions.replace(newLoc));
-  },
+  redirectAction: routerActions.replace,
   allowRedirectBack: false,
 });
 

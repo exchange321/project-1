@@ -14,21 +14,26 @@ module.exports = function(app) {
     }).then((data) => {
       if (data.total <= 0) {
         const url = `http://www.youtube.com/watch?v=${videoId}`;
-
-        youtubeDl.getInfo(url, ['-f', 'mp4[filesize<=10M][height<=1080]'], (err, info) => {
+        youtubeDl.getInfo(url, ['-f', 'best[filesize <=? 20M][height <= 480][ext=mp4]'], (err, info) => {
           if (err) {
             responseError(res, 'The video is too big or does not exist. Please try again.');
           } else {
             const filename = info._filename;
             const file = path.join(__dirname, '..', '..', 'assets', 'videos', filename);
-            const video = youtubeDl(url, ['-f', 'mp4[filesize<=10M][height<=1080]']);
+            const video = youtubeDl(url, ['-f', 'best[filesize <=? 20M][height <= 480][ext=mp4]']);
             let error = false;
-            video.on('info', () => {
-              video.pipe(fs.createWriteStream(file));
+            video.on('info', (info) => {
+              if (info.size > 20000000) {
+                video.emit('error', {
+                  message: 'The video is too long. Please try other videos.',
+                });
+              } else {
+                video.pipe(fs.createWriteStream(file));
+              }
             });
             video.on('error', (err) => {
               error = true;
-              responseError(res, err);
+              responseError(res, err.message);
             });
             video.on('end', () => {
               if (!error) {
@@ -67,7 +72,8 @@ const responseUrl = (req, res, filename) => {
 
 const responseError = (res, error) => {
   res.status(404);
-  res.json({
-    error,
+  res.statusMessage = error;
+  res.send({
+    message: error,
   });
 };

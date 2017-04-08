@@ -36,8 +36,9 @@ const App = ({ location }) => {
             <LoginPage success={false} />
           )} />
           <Route exact path="/watch" component={PageForUserOnly(VideoPage)} />
-          <Route exact path="/404" component={NotFoundPage} />
-          <Redirect to="/404" />
+          {/*<Route exact path="/404" component={NotFoundPage} />*/}
+          {/*<Redirect to="/404" />*/}
+          <Route path="*" component={NotFoundPage} />
         </Switch>
       </div>
     </MuiThemeProvider>
