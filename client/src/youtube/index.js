@@ -4,31 +4,31 @@
 import withQuery from 'with-query';
 import API_KEY from '../../../secret';
 
-const searchUrl = "https://www.googleapis.com/youtube/v3/search";
-const getInfoUrl = "https://www.googleapis.com/youtube/v3/videos";
+const searchUrl = 'https://www.googleapis.com/youtube/v3/search';
+const getInfoUrl = 'https://www.googleapis.com/youtube/v3/videos';
 
 const baseParams = {
   key: API_KEY,
 };
 
-const searchParams = (query) => ({
+const searchParams = query => ({
   ...baseParams,
   maxResults: 10,
-  part: "snippet",
+  part: 'snippet',
   q: query,
-  type: "video",
-  videoDuration: "short",
-  videoEmbeddable: "true",
-  videoSyndicated: "true",
+  type: 'video',
+  videoDuration: 'short',
+  videoEmbeddable: 'true',
+  videoSyndicated: 'true',
 });
 
-const getInfoParams = (videoId) => ({
+const getInfoParams = videoId => ({
   ...baseParams,
-  part: "snippet",
+  part: 'snippet',
   id: videoId,
 });
 
-export const search = (query) => (
+export const search = query => (
   new Promise((resolve, reject) => {
     fetch(withQuery(searchUrl, searchParams(query)))
       .then(res => res.json())
@@ -41,7 +41,7 @@ export const search = (query) => (
   })
 );
 
-export const getInfo = (videoId) => (
+export const getInfo = videoId => (
   new Promise((resolve, reject) => {
     fetch(withQuery(getInfoUrl, getInfoParams(videoId)))
       .then(res => res.json())

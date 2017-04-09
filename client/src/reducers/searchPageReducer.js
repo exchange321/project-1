@@ -10,6 +10,7 @@ const searchPageReducer = (state = initialState.searchPage, action) => {
       return {
         ...state,
         query: action.value,
+        words: action.words,
       };
     }
 
@@ -17,6 +18,16 @@ const searchPageReducer = (state = initialState.searchPage, action) => {
       return {
         ...state,
         results: action.results,
+      };
+    }
+
+    case SEARCH_PAGE_ACTIONS.REGISTER_CARET_POSITION: {
+      return {
+        ...state,
+        inputbox: {
+          ...state.inputbox,
+          caretPosition: action.caretPosition,
+        },
       };
     }
 

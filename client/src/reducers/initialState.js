@@ -11,7 +11,11 @@ export default {
   },
   searchPage: {
     query: '',
+    words: [],
     results: [],
+    inputbox: {
+      caretPosition: 0,
+    },
   },
   videoPage: {
     videoId: '',
@@ -19,8 +23,8 @@ export default {
     isVideoLoaded: false,
     isOnPage: false,
     video: {
-      title: "",
-      description: "",
+      title: '',
+      description: '',
     },
   },
 };

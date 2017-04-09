@@ -12,8 +12,9 @@ import * as searchPageActions from '../../../actions/searchPageActions';
 import { ElementForUserOnly } from '../../../auth';
 
 @connect(
-  ({ searchPage: { query, results } }) => ({
+  ({ searchPage: { query, words, results } }) => ({
     query,
+    words,
     numResults: results.length,
   }),
   dispatch => ({
@@ -28,15 +29,22 @@ class SearchBar extends Component {
       pathname: PropTypes.string.isRequired,
     }).isRequired,
     query: PropTypes.string.isRequired,
+    words: PropTypes.arrayOf(PropTypes.element).isRequired,
     numResults: PropTypes.number.isRequired,
     actions: PropTypes.shape({
       handleQueryChange: PropTypes.func.isRequired,
       handleQuerySubmit: PropTypes.func.isRequired,
+      handleInputBoxFocus: PropTypes.func.isRequired,
     }).isRequired,
     routerActions: PropTypes.shape({
       push: PropTypes.func.isRequired,
     }).isRequired,
   };
+
+  constructor(props) {
+    super(props);
+    this.caretScanTimer = null;
+  }
 
   componentDidMount() {
     $('#search-bar-query').focus();
@@ -71,31 +79,58 @@ class SearchBar extends Component {
     });
   };
 
+  handleInputBoxFocus = () => {
+    if (this.caretScanTimer === null) {
+      this.caretScanTimer = setInterval(() => {
+        this.props.actions.handleInputBoxFocus(this.input.selectionStart);
+      }, 100);
+    }
+  };
+
+  handleInputBoxBlur = () => {
+    if (this.caretScanTimer !== null) {
+      clearInterval(this.caretScanTimer);
+      this.caretScanTimer = null;
+    }
+  };
+
   render() {
     const {
       query,
+      words,
       numResults,
       location,
     } = this.props;
     return (
       <div className={`search-bar-container ${(numResults > 0 || location.pathname !== '/') ? 'has-results' : ''}`}>
-          <div className="search-bar container">
-            <form onSubmit={this.handleQuerySubmit}>
-              <div className="search-bar-inner input-group">
-                <span className="input-group-addon">How to</span>
+        <div className="search-bar container">
+          <form onSubmit={this.handleQuerySubmit}>
+            <div className="search-bar-inner input-group">
+              <span className="input-group-addon">How to</span>
+              <div className="search-bar-outer">
                 <input
                   type="text"
                   id="search-bar-query"
                   className="form-control"
                   value={query}
+                  autoComplete="off"
+                  ref={input => this.input = input}
                   onChange={this.handleQueryChange}
+                  onFocus={this.handleInputBoxFocus}
+                  onBlur={this.handleInputBoxBlur}
                 />
-                <span className="input-group-btn">
-                  <button type="submit" className="btn btn-secondary"><i className="fa fa-search" /></button>
-                </span>
+                <div className="words-container">
+                  <div className="words">
+                    { words }
+                  </div>
+                </div>
               </div>
-            </form>
-          </div>
+              <span className="input-group-btn">
+                  <button type="submit" className="btn btn-secondary"><i className="fa fa-search" /></button>
+              </span>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }
