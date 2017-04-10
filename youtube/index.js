@@ -2,7 +2,7 @@
  * Created by Wayuki on 08-Apr-17.
  */
 import withQuery from 'with-query';
-import API_KEY from '../../../secret';
+import API_KEY from '../secret';
 
 const searchUrl = 'https://www.googleapis.com/youtube/v3/search';
 const getInfoUrl = 'https://www.googleapis.com/youtube/v3/videos';

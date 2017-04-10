@@ -3,7 +3,7 @@
  */
 import toastr from 'toastr';
 import { routerActions } from 'react-router-redux';
-import { getInfo } from '../youtube';
+import { getInfo } from '../../../youtube';
 
 import { VIDEO_PAGE_ACTIONS } from './actionTypes';
 

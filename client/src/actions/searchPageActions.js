@@ -5,8 +5,8 @@
 
 import React from 'react';
 import { SEARCH_PAGE_ACTIONS } from './actionTypes';
-import { search } from '../youtube';
-import { getWordAt } from '../../../helpers';
+import { search } from '../../../youtube';
+import { getWordAt, getWordSuggestion, dissembleSentence } from '../../../helpers';
 
 const registerQueryResults = results => ({
   type: SEARCH_PAGE_ACTIONS.REGISTER_QUERY_RESULTS,
@@ -15,7 +15,7 @@ const registerQueryResults = results => ({
 
 export const handleQueryChange = value => (
   (dispatch) => {
-    let words = value.match(/[,.!?;: ]+|\b[a-zA-Z0-9']+\b|^[a-zA-Z0-9]+\b/g) || [];
+    let words = dissembleSentence(value);
     words = words.map((word, key) => {
       if (word.search(/[,. ]/) > -1) {
         return <span key={key} className="punct">{ word }</span>;
@@ -53,14 +53,58 @@ export const handleInputBoxFocus = caretPosition => (
       },
     } = getState().searchPage;
     if (oldCaretPosition !== caretPosition) {
-      const word = getWordAt(query, caretPosition);
-      console.log(word, window.$(`.${word.pos}`).text());
-      dispatch({
-        type: SEARCH_PAGE_ACTIONS.REGISTER_CARET_POSITION,
-        caretPosition,
-      });
+      const { wordClass, wordPos, word } = getWordAt(query, caretPosition);
+      if (word.search(/[,. ]/) < 0 && word.length > 0) {
+        const spelling = getWordSuggestion(word);
+        if (!spelling.found && spelling.suggestions.length > 0) {
+          dispatch(registerSpellingSuggestions({
+            show: true,
+            wordPos,
+            pos: $(`.${wordClass}`).position().left,
+            suggestions: spelling.suggestions,
+          }));
+        } else {
+          dispatch(registerSpellingSuggestions({
+            show: false,
+          }));
+        }
+      } else {
+        dispatch(registerSpellingSuggestions({
+          show: false,
+        }));
+      }
+      dispatch(registerCaretPosition(caretPosition));
     }
   }
+);
+
+export const registerCaretPosition = caretPosition => ({
+  type: SEARCH_PAGE_ACTIONS.REGISTER_CARET_POSITION,
+  caretPosition,
+});
+
+export const registerSpellingSuggestions = spelling => ({
+  type: SEARCH_PAGE_ACTIONS.REGISTER_SPELLING_SUGGESTIONS,
+  spelling,
+});
+
+export const handleApplyingSuggestion = (wordPos, word) => (
+  (dispatch, getState) => new Promise((resolve) => {
+    const {
+      query,
+    } = getState().searchPage;
+    const words = dissembleSentence(query);
+    words[wordPos] = word;
+    const left = words.slice(0, wordPos + 1).join('');
+    const newCaretPosition = left.length;
+    const right = words.slice(wordPos + 1).join('');
+    const newWord = left + right;
+    dispatch(handleQueryChange(newWord));
+    dispatch(registerSpellingSuggestions({
+      show: false,
+    }));
+    resolve(newCaretPosition);
+  })
 );
 
 export default () => {};

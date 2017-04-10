@@ -92,7 +92,7 @@ div.sidebar {
   position: fixed;
   z-index: 15;
   top: 2rem;
-  left: 3rem;
+  left: -1.5rem;
   & button.btn-toggle {
     background-color: transparent;
     color: var(--font-color);
@@ -141,22 +141,32 @@ div.search-bar-container {
         position: relative;
         & input {
           border-radius: 0;
-          background: transparent;
           font-family: 'Roboto', Arial, sans-serif;
         }
         & .words-container {
+          visibility: hidden;
           position: absolute;
           top: 0;
           right: 0;
           bottom: 0;
           left: 0;
-          background: white;
+          padding: .5rem .75rem;
           & .words {
-            padding: 8px 12px;
-            color: #ccc;
             & span {
               white-space: pre;
             }
+          }
+        }
+        & .spell-suggestion {
+          position: absolute;
+          top: 100%;
+          margin-left: -1.25rem;
+          & .list-group-item {
+            padding-top: .3rem;
+            padding-bottom: .3rem;
+          }
+          & .list-group-item-action:hover {
+            cursor: pointer;
           }
         }
       }

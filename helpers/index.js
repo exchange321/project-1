@@ -1,6 +1,11 @@
 /**
  * Created by Wayuki on 26-Mar-17.
  */
+import Spelling from 'spelling';
+import dictionary from 'spelling/dictionaries/en_US';
+
+const dict = new Spelling(dictionary);
+
 export const getCookieData = (name) => {
   const value = "; " + document.cookie;
   const parts = value.split("; " + name + "=");
@@ -17,8 +22,8 @@ export const getWordAt = (str, pos) => {
   let numWordsBefore = -1;
   const lastWordPos = str.slice(0, pos + 1).search(/[,. ]+[0-9a-zA-Z]*$/);
   if (lastWordPos > -1) {
-    const previousSentense = str.slice(0, lastWordPos);
-    const previousWords = previousSentense.match(/[,.!?;: ]+|\b[a-zA-Z0-9']+\b|^[a-zA-Z0-9]+\b/g);
+    const previousSentence = str.slice(0, lastWordPos);
+    const previousWords = dissembleSentence(previousSentence);
     numWordsBefore = previousWords.length;
   }
 
@@ -33,8 +38,35 @@ export const getWordAt = (str, pos) => {
   }
 
   return {
-    pos: `word-${numWordsBefore + 1}`,
+    wordPos: numWordsBefore + 1,
+    wordClass: `word-${numWordsBefore + 1}`,
     word,
   }
 
 };
+
+export const dissembleSentence = sentence => sentence.match(/[,.!?;: ]+|\b[a-zA-Z0-9']+\b|^[a-zA-Z0-9]+\b/g) || [];
+
+export const getWordSuggestion = word => dict.lookup(word);
+
+const setSelectionRange = (input, selectionStart, selectionEnd) => {
+  if (input.setSelectionRange) {
+    input.focus();
+    input.setSelectionRange(selectionStart, selectionEnd);
+  }
+  else if (input.createTextRange) {
+    const range = input.createTextRange();
+    range.collapse(true);
+    range.moveEnd('character', selectionEnd);
+    range.moveStart('character', selectionStart);
+    range.select();
+  }
+};
+
+export const setCaretToPos = (input, pos) => {
+  setSelectionRange(input, pos, pos);
+};
+
+export const checkOverflown = element => (
+  element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth
+);

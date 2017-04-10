@@ -31,6 +31,18 @@ const searchPageReducer = (state = initialState.searchPage, action) => {
       };
     }
 
+    case SEARCH_PAGE_ACTIONS.REGISTER_SPELLING_SUGGESTIONS: {
+      return {
+        ...state,
+        spelling: {
+          show: action.spelling.show,
+          wordPos: action.spelling.show ? action.spelling.wordPos : 0,
+          pos: action.spelling.show ? action.spelling.pos : 0,
+          suggestions: action.spelling.show ? action.spelling.suggestions: [],
+        },
+      };
+    }
+
     default: {
       return state;
     }

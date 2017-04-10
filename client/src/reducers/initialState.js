@@ -13,8 +13,14 @@ export default {
     query: '',
     words: [],
     results: [],
+    spelling: {
+      show: false,
+      wordPos: 0,
+      pos: 0,
+      suggestions: [],
+    },
     inputbox: {
-      caretPosition: 0,
+      caretPosition: -1,
     },
   },
   videoPage: {

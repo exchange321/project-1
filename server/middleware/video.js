@@ -14,7 +14,7 @@ module.exports = function(app) {
     }).then((data) => {
       if (data.total <= 0) {
         const url = `http://www.youtube.com/watch?v=${videoId}`;
-        youtubeDl.getInfo(url, ['-f', 'best[filesize <=? 20M][height <= 480][ext=mp4]'], (err, info) => {
+        youtubeDl.getInfo(url, ['-f', 'best[filesize <=? 20M][height <= 360][ext=mp4]'], (err, info) => {
           if (err) {
             responseError(res, 'The video is too big or does not exist. Please try again.');
           } else {
