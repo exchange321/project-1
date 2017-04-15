@@ -16,13 +16,14 @@
 - [ ] Search Functions
     - [ ] Search Bar
         - [x] Initialize Search Bar
+        - [x] Spell Auto-suggestion
     - [x] Search Result
         - [x] Initialize Search Result
         - [x] Display Information
 - [ ] Video Functions
     - [x] Initialize Video Playback
     - [x] Video Controls
-    - [ ] Note-taking
+    - [ ] Fetch Video
         - [x] Download Video on Server
         - [x] Stream Video from Server
 
@@ -33,14 +34,19 @@
     - [ ] Eye-Tracking Functions
 - [ ] Search Functions
     - [ ] Search Bar
-        - [ ] Spell Auto-suggestion
         - [ ] Emoji in Suggestions
         - [ ] Save History
+    - [ ] Search Result
+        - [ ] (New) Access Video Info on Server First
 - [ ] Video Functions
+    - [ ] Fetch Video
+        - [ ] (New) Store Fetched Video's Info
+        - [ ] (New) Capture 3 Frames from Downloaded Videos
     - [ ] Note-taking
         - [ ] Frame Capture
         - [ ] Input Notes
         - [ ] Store Notes on Server
+        - [ ] (New) Print Notes
     - [ ] Playback History
     - [ ] Favorite
 
