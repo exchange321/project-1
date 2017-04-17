@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { routerActions } from 'react-router-redux';
 
+import app from '../../feathers';
+
 import VideoPlayback from './videoPlayback/index.jsx';
 import VideoNotes from './videoNotes/index.jsx';
 import VideoNoteForm from './videoNoteForm/index.jsx';

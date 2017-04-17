@@ -33,6 +33,9 @@ export default {
       description: '',
     },
   },
+  videoNotes: {
+    notes: [],
+  },
   videoNote: {
     show: false,
     newNote: false,

@@ -1,14 +1,95 @@
 /**
  * Created by Wayuki on 26-Mar-17.
  */
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import app from '../../../feathers';
+
+import * as videoNotesActions from '../../../actions/videoNotesActions';
 
 import VideoNote from './VideoNote.jsx';
 
-const VideoNotes = () => (
-  <div className="video-notes-container" />
-);
+@connect(
+  ({
+    auth: {
+      user: {
+        _id,
+      }
+    },
+     videoPage: {
+      videoId,
+     },
+     videoNotes
+  }) => ({
+    userId: _id,
+    videoId,
+    ...videoNotes,
+  }),
+  dispatch => ({
+    actions: bindActionCreators(videoNotesActions, dispatch),
+  })
+)
+class VideoNotes extends Component {
 
-VideoNotes.propTypes = {};
+  static propTypes = {
+    userId: PropTypes.string.isRequired,
+    videoId: PropTypes.string.isRequired,
+    notes: PropTypes.arrayOf(PropTypes.shape({
+      imgUrl: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      note: PropTypes.string.isRequired,
+    })).isRequired,
+    actions: PropTypes.shape({
+      registerNotes: PropTypes.func.isRequired,
+    }).isRequired,
+  };
+
+  componentDidUpdate(prevProps) {
+    const {
+      userId,
+      videoId,
+      actions: {
+        registerNotes,
+      },
+    } = this.props;
+    if (!this.notes && userId && videoId) {
+      this.notes = app.service('notes').find({
+        query: {
+          userId,
+          videoId,
+          $select: [
+            'imgUrl',
+            'title',
+            'note',
+          ],
+        },
+      }).subscribe(({ data: notes }) => registerNotes(notes));
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.notes) {
+      this.notes.unsubscribe();
+    }
+  }
+
+  render() {
+    const { notes } = this.props;
+    return (
+      <div className="video-notes-container">
+        {
+          notes.map((note) => (
+            <VideoNote
+              key={note._id}
+              {...note}
+            />
+          ))
+        }
+      </div>
+    );
+  }
+}
 
 export default VideoNotes;

@@ -3,19 +3,26 @@
  */
 import React, { PropTypes } from 'react';
 
-const VideoNote = () => (
+const VideoNote = ({ imgUrl, title, note }) => (
   <div className="video-note-container clearfix">
     <div className="row">
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
-        <div className="thumbnail" />
+        <div className="thumbnail">
+          <img src={imgUrl} alt={title} className="img-fluid" />
+        </div>
       </div>
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aut culpa cum distinctio dolorem harum, omnis pariatur repudiandae velit? Distinctio dolor illum ipsum laborum sed sint. Dolores laboriosam quas reprehenderit similique. Ad amet atque autem, debitis dignissimos distinctio dolore ea eaque eius eligendi eos error, excepturi fuga fugiat fugit impedit in inventore laudantium libero magni molestias nihil officia officiis pariatur placeat praesentium quam quas quasi quo recusandae repudiandae saepe, tempore!
+        <p className="lead">{ title }</p>
+        <p>{ note }</p>
       </div>
     </div>
   </div>
 );
 
-VideoNote.propTypes = {};
+VideoNote.propTypes = {
+  imgUrl: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  note: PropTypes.string.isRequired,
+};
 
 export default VideoNote;

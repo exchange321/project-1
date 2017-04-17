@@ -304,15 +304,8 @@ div.video {
       padding-top: 1rem;
       padding-bottom: 1rem;
       & .thumbnail {
-        position: relative;
         @media (--xs-md) {
           margin-bottom: 1rem;
-        }
-        &:after {
-          content: '';
-          padding-top: 56.25%;
-          display: block;
-          background-color: var(--thumbnail-color);
         }
       }
     }
