@@ -21,6 +21,7 @@ class VideoNoteForm extends Component {
   static propTypes = {
     show: PropTypes.bool.isRequired,
     newNote: PropTypes.bool.isRequired,
+    id: PropTypes.string.isRequired,
     imgUrl: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     note: PropTypes.string.isRequired,
@@ -41,10 +42,17 @@ class VideoNoteForm extends Component {
     this.props.actions.handleFormFieldValueChange(key, value);
   };
 
-  handleDeleteNote = () => {
+  handleDeleteNote = (noteId) => {
     $(".btn-delete, .btn-submit").prop("disabled", true);
     $(".btn-delete").addClass("progress-bar-striped progress-bar-animated");
-    this.props.actions.handleDeleteNote().then(() => {
+    this.props.actions.handleDeleteNote(noteId).then(() => {
+      toastr.success('Note deleted.');
+      this.props.actions.handleModalToggle();
+      $(".btn-delete, .btn-submit").prop("disabled", false);
+      $(".btn-delete").removeClass("progress-bar-striped progress-bar-animated");
+    }).catch((err) => {
+      toastr.error(err.message || 'We are having trouble deleting your notes. Please try again.');
+      this.props.actions.registerError(err);
       $(".btn-delete, .btn-submit").prop("disabled", false);
       $(".btn-delete").removeClass("progress-bar-striped progress-bar-animated");
     });
@@ -56,12 +64,12 @@ class VideoNoteForm extends Component {
     $(".btn-delete, .btn-submit").prop("disabled", true);
     $(".btn-submit").addClass("progress-bar-striped progress-bar-animated");
     this.props.actions.handleFormSubmit().then(() => {
-      toastr.success('New note saved.');
+      toastr.success('Note saved.');
       this.props.actions.handleModalToggle();
       $(".btn-delete, .btn-submit").prop("disabled", false);
       $(".btn-submit").removeClass("progress-bar-striped progress-bar-animated");
     }).catch((err) => {
-      toastr.error(err.message || 'We are having trouble locating your notes. Please try again.');
+      toastr.error(err.message || 'We are having trouble saving your notes. Please try again.');
       this.props.actions.registerError(err);
       $(".btn-delete, .btn-submit").prop("disabled", false);
       $(".btn-submit").removeClass("progress-bar-striped progress-bar-animated");
@@ -71,6 +79,7 @@ class VideoNoteForm extends Component {
   render() {
     const {
       show,
+      id,
       imgUrl,
       newNote,
       title,
@@ -121,7 +130,7 @@ class VideoNoteForm extends Component {
                       type="button"
                       className="btn-delete"
                       color="danger"
-                      onClick={this.handleDeleteNote}
+                      onClick={() => this.handleDeleteNote(id)}
                     >
                       Delete Note
                     </Button>

@@ -24,13 +24,13 @@ export const handleCreateNewNote = (imgUrl) => ({
   imgUrl,
 });
 
-export const handleDeleteNote = () => (
-  dispatch => new Promise((resolve) => {
-    console.log('Deleting...');
-    setTimeout(() => {
-      console.log('Deleted');
+export const handleDeleteNote = noteId => (
+  dispatch => new Promise((resolve, reject) => {
+    app.service('notes').remove(noteId).then(() => {
       resolve();
-    }, 1000);
+    }).catch((err) => {
+      reject(err);
+    });
   })
 );
 
