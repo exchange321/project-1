@@ -26,6 +26,9 @@
     - [ ] Fetch Video
         - [x] Download Video on Server
         - [x] Stream Video from Server
+    - [ ] Note-taking
+        - [x] Frame Capture
+        - [x] Input Notes
 
 ## Todos
 - [ ] General Functions
