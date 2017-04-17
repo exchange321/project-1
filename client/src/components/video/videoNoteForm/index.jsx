@@ -132,7 +132,9 @@ class VideoNoteForm extends Component {
                   className="btn-submit"
                   color="primary"
                 >
-                  Create Note
+                  {
+                    newNote ? 'Create Note' : 'Edit Note'
+                  }
                 </Button>
               </ButtonGroup>
             </ModalFooter>

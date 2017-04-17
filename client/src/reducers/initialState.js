@@ -39,6 +39,7 @@ export default {
   videoNote: {
     show: false,
     newNote: false,
+    id: '',
     imgUrl: '',
     title: '',
     note: '',

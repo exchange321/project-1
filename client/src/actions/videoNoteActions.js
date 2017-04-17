@@ -14,6 +14,11 @@ export const handleFormFieldValueChange = (key, value) => ({
   value,
 });
 
+export const registerEditingNote = note => ({
+  type: VIDEO_NOTE_ACTIONS.REGISTER_EDITING_NOTE,
+  note,
+});
+
 export const handleCreateNewNote = (imgUrl) => ({
   type: VIDEO_NOTE_ACTIONS.HANDLE_CREATE_NEW_NOTE,
   imgUrl,
@@ -31,21 +36,35 @@ export const handleDeleteNote = () => (
 
 export const handleFormSubmit = () => (
   (dispatch, getState) => new Promise((resolve, reject) => {
-    const userId = getState().auth.user._id;
-    const videoId = getState().videoPage.videoId;
-    const { imgUrl, title, note } = getState().videoNote;
-    const request = {
-      videoId,
-      userId,
-      imgUrl,
-      title,
-      note,
-    };
-    app.service('notes').create(request).then(() => {
-      resolve();
-    }).catch((err) => {
-      reject(err);
-    });
+    const { newNote, id } = getState().videoNote;
+    if (!newNote && id.length > 0) {
+      const { imgUrl, title, note } = getState().videoNote;
+      app.service('notes').patch(id, {
+        imgUrl,
+        title,
+        note,
+      }).then(() => {
+        resolve();
+      }).catch((err) => {
+        reject(err);
+      });
+    } else {
+      const userId = getState().auth.user._id;
+      const videoId = getState().videoPage.videoId;
+      const { imgUrl, title, note } = getState().videoNote;
+      const request = {
+        videoId,
+        userId,
+        imgUrl,
+        title,
+        note,
+      };
+      app.service('notes').create(request).then(() => {
+        resolve();
+      }).catch((err) => {
+        reject(err);
+      });
+    }
   })
 );
 

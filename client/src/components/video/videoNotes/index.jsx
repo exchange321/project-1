@@ -43,6 +43,7 @@ class VideoNotes extends Component {
     })).isRequired,
     actions: PropTypes.shape({
       registerNotes: PropTypes.func.isRequired,
+      handleNoteClick: PropTypes.func.isRequired,
     }).isRequired,
   };
 
@@ -65,6 +66,9 @@ class VideoNotes extends Component {
             'note',
           ],
         },
+        rx: {
+          listStrategy: 'always',
+        },
       }).subscribe(({ data: notes }) => registerNotes(notes));
     }
   }
@@ -76,13 +80,19 @@ class VideoNotes extends Component {
   }
 
   render() {
-    const { notes } = this.props;
+    const {
+      notes,
+      actions: {
+        handleNoteClick,
+      },
+    } = this.props;
     return (
       <div className="video-notes-container">
         {
           notes.map((note) => (
             <VideoNote
               key={note._id}
+              onNoteClick={handleNoteClick}
               {...note}
             />
           ))

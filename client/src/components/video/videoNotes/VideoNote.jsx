@@ -3,8 +3,11 @@
  */
 import React, { PropTypes } from 'react';
 
-const VideoNote = ({ imgUrl, title, note }) => (
-  <div className="video-note-container clearfix">
+const VideoNote = ({ onNoteClick, _id, imgUrl, title, note }) => (
+  <div
+    className="video-note-container clearfix"
+    onClick={() => onNoteClick(_id)}
+  >
     <div className="row">
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
         <div className="thumbnail">
@@ -20,6 +23,8 @@ const VideoNote = ({ imgUrl, title, note }) => (
 );
 
 VideoNote.propTypes = {
+  onNoteClick: PropTypes.func.isRequired,
+  _id: PropTypes.string.isRequired,
   imgUrl: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   note: PropTypes.string.isRequired,

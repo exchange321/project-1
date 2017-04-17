@@ -301,8 +301,19 @@ div.video {
   }
   & .video-notes-container {
     & .video-note-container {
-      padding-top: 1rem;
-      padding-bottom: 1rem;
+      padding: 1rem;
+      z-index: 1;
+      position: relative;
+      overflow: hidden;
+      background-color: var(--theme-color);
+      border-radius: 5px;
+      @apply (--transition-all);
+      &:hover {
+        @apply (--scale);
+        @apply (--box-shadow);
+        z-index: 2;
+        cursor: pointer;
+      }
       & .thumbnail {
         @media (--xs-md) {
           margin-bottom: 1rem;

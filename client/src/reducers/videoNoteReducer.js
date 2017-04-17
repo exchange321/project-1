@@ -20,6 +20,15 @@ const VideoNoteReducer = (state = initialState.videoNote, action) => {
       };
     }
 
+    case VIDEO_NOTE_ACTIONS.REGISTER_EDITING_NOTE: {
+      return {
+        ...state,
+        ...action.note,
+        show: true,
+        newNote: false,
+      };
+    }
+
     case VIDEO_NOTE_ACTIONS.HANDLE_CREATE_NEW_NOTE: {
       return {
         ...state,
