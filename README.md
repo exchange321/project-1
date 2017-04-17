@@ -29,6 +29,7 @@
     - [ ] Note-taking
         - [x] Frame Capture
         - [x] Input Notes
+        - [x] Store Notes on Server
 
 ## Todos
 - [ ] General Functions
@@ -46,9 +47,6 @@
         - [ ] (New) Store Fetched Video's Info
         - [ ] (New) Capture 3 Frames from Downloaded Videos
     - [ ] Note-taking
-        - [ ] Frame Capture
-        - [ ] Input Notes
-        - [ ] Store Notes on Server
         - [ ] (New) Print Notes
     - [ ] Playback History
     - [ ] Favorite
