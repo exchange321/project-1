@@ -77,6 +77,10 @@ img.img-responsive {
   height: auto;
 }
 
+.img-fluid {
+  width: auto;
+}
+
 /* LIBRARY - END */
 
 /* CONTAINER - START */
