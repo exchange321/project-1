@@ -29,6 +29,13 @@ const VideoNoteReducer = (state = initialState.videoNote, action) => {
       };
     }
 
+    case VIDEO_NOTE_ACTIONS.REGISTER_ERRORS: {
+      return {
+        ...state,
+        errors: action.errors,
+      }
+    }
+
     case VIDEO_NOTE_ACTIONS.RESET_NOTE: {
       return state;
     }

@@ -2,6 +2,7 @@
  * Created by Wayuki on 15-Apr-17.
  */
 import { VIDEO_NOTE_ACTIONS } from './actionTypes';
+import app from '../feathers';
 
 export const handleModalToggle = () => ({
   type: VIDEO_NOTE_ACTIONS.HANDLE_MODAL_TOGGLE,
@@ -29,14 +30,29 @@ export const handleDeleteNote = () => (
 );
 
 export const handleFormSubmit = () => (
-  dispatch => new Promise((resolve) => {
-    console.log('Submitting...');
-    setTimeout(() => {
-      console.log('Submitted');
+  (dispatch, getState) => new Promise((resolve, reject) => {
+    const userId = getState().auth.user._id;
+    const videoId = getState().videoPage.videoId;
+    const { imgUrl, title, note } = getState().videoNote;
+    const request = {
+      videoId,
+      userId,
+      imgUrl,
+      title,
+      note,
+    };
+    app.service('notes').create(request).then(() => {
       resolve();
-    }, 1000);
+    }).catch((err) => {
+      reject(err);
+    });
   })
 );
+
+export const registerError = errors => ({
+  type: VIDEO_NOTE_ACTIONS.REGISTER_ERRORS,
+  errors,
+});
 
 export const resetNote = () => ({
   type: VIDEO_NOTE_ACTIONS.RESET_NOTE,

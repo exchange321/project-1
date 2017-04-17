@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Button, ButtonGroup, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import toastr from 'toastr';
 
 import TextInput from '../../common/TextInput.jsx';
 import TextareaInput from '../../common/TextareaInput.jsx';
@@ -23,12 +24,14 @@ class VideoNoteForm extends Component {
     imgUrl: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     note: PropTypes.string.isRequired,
+    errors: PropTypes.objectOf(PropTypes.string).isRequired,
     actions: PropTypes.shape({
       handleModalToggle: PropTypes.func.isRequired,
       handleFormFieldValueChange: PropTypes.func.isRequired,
       handleDeleteNote: PropTypes.func.isRequired,
       handleFormSubmit: PropTypes.func.isRequired,
       resetNote: PropTypes.func.isRequired,
+      registerError: PropTypes.func.isRequired,
     }).isRequired,
   };
 
@@ -49,9 +52,17 @@ class VideoNoteForm extends Component {
 
   handleFormSubmit = (e) => {
     e.preventDefault();
+    this.props.actions.registerError({});
     $(".btn-delete, .btn-submit").prop("disabled", true);
     $(".btn-submit").addClass("progress-bar-striped progress-bar-animated");
     this.props.actions.handleFormSubmit().then(() => {
+      toastr.success('New note saved.');
+      this.props.actions.handleModalToggle();
+      $(".btn-delete, .btn-submit").prop("disabled", false);
+      $(".btn-submit").removeClass("progress-bar-striped progress-bar-animated");
+    }).catch((err) => {
+      toastr.error(err.message || 'We are having trouble locating your notes. Please try again.');
+      this.props.actions.registerError(err);
       $(".btn-delete, .btn-submit").prop("disabled", false);
       $(".btn-submit").removeClass("progress-bar-striped progress-bar-animated");
     });
@@ -64,6 +75,7 @@ class VideoNoteForm extends Component {
       newNote,
       title,
       note,
+      errors,
       actions: {
         handleModalToggle,
       },
@@ -90,6 +102,7 @@ class VideoNoteForm extends Component {
                   placeholder="Please enter the title"
                   value={title}
                   onValueChange={this.handleFormFieldValueChange}
+                  error={errors.title || ''}
                 />
                 <TextareaInput
                   id="note"
@@ -97,18 +110,23 @@ class VideoNoteForm extends Component {
                   placeholder="Please enter the note"
                   value={note}
                   onValueChange={this.handleFormFieldValueChange}
+                  error={errors.note || ''}
                 />
             </ModalBody>
             <ModalFooter>
               <ButtonGroup>
-                <Button
-                  type="button"
-                  className="btn-delete"
-                  color="danger"
-                  onClick={this.handleDeleteNote}
-                >
-                  Delete Note
-                </Button>
+                {
+                  newNote ? null : (
+                    <Button
+                      type="button"
+                      className="btn-delete"
+                      color="danger"
+                      onClick={this.handleDeleteNote}
+                    >
+                      Delete Note
+                    </Button>
+                  )
+                }
                 <Button
                   type="submit"
                   className="btn-submit"

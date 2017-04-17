@@ -3,40 +3,37 @@
  */
 import React, { Component, PropTypes } from 'react';
 
-class TextInput extends Component {
-  static propTypes = {
-    id: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    placeholder: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-    onValueChange: PropTypes.func.isRequired,
-  };
+const TextInput = ({ id, label, type, placeholder, value, onValueChange, error }) => {
+  const hasError = error.length > 0;
+  return (
+    <div className={`form-group ${hasError ? 'has-danger' : ''}`}>
+      <label htmlFor={id}>{ label }</label>
+      <input
+        type={type}
+        className={`form-control ${hasError ? 'form-control-danger' : ''}`}
+        id={id}
+        name={id}
+        placeholder={placeholder}
+        value={value}
+        onChange={onValueChange}
+      />
+      {
+        hasError ? (
+          <div className="form-control-feedback">{error}</div>
+        ) : null
+      }
+    </div>
+  );
+};
 
-  render() {
-    const {
-      id,
-      label,
-      type,
-      placeholder,
-      value,
-      onValueChange
-    } = this.props;
-    return (
-      <div className="form-group">
-        <label htmlFor={id}>{ label }</label>
-        <input
-          type={type}
-          className="form-control"
-          id={id}
-          name={id}
-          placeholder={placeholder}
-          value={value}
-          onChange={onValueChange}
-        />
-      </div>
-    );
-  }
-}
+TextInput.propTypes = {
+  id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onValueChange: PropTypes.func.isRequired,
+  error: PropTypes.string.isRequired,
+};
 
 export default TextInput;

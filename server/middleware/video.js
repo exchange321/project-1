@@ -37,7 +37,7 @@ module.exports = function(app) {
             });
             video.on('end', () => {
               if (!error) {
-                recordVideo(req, res, videos, {
+                recordVideo(app, req, res, videos, {
                   videoId,
                   filename,
                 });
@@ -47,7 +47,7 @@ module.exports = function(app) {
         });
       } else {
         const { filename } = data.data[0];
-        responseUrl(req, res, filename);
+        responseUrl(app, req, res, filename);
       }
     }).catch(() => {
       responseError(res, 'We have encountered problems when accessing the video. Please try again.');
@@ -55,18 +55,18 @@ module.exports = function(app) {
   };
 };
 
-const recordVideo = (req, res, videos, videoInfo) => {
+const recordVideo = (app, req, res, videos, videoInfo) => {
   videos.create(videoInfo).then(() => {
-    responseUrl(req, res, videoInfo.filename);
+    responseUrl(app, req, res, videoInfo.filename);
   }).catch(() => {
-    responseError(res, 'We have encountered problems when accessing the video. Please try again.');
+    responseError(res, 'We have encountered problems when recording the video. Please try again.');
   });
 };
 
-const responseUrl = (req, res, filename) => {
+const responseUrl = (app, req, res, filename) => {
   res.status(200);
   res.json({
-    url: `${req.protocol}://${req.get('host')}/assets/videos/${filename}`,
+    url: `${req.protocol}://${app.get('host')}:${app.get('port')}/assets/videos/${filename}`,
   });
 };
 

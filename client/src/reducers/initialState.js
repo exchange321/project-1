@@ -39,5 +39,6 @@ export default {
     imgUrl: '',
     title: '',
     note: '',
+    errors: {},
   },
 };
