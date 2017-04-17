@@ -33,4 +33,11 @@ export default {
       description: '',
     },
   },
+  videoNote: {
+    show: false,
+    newNote: false,
+    imgUrl: '',
+    title: '',
+    note: '',
+  },
 };

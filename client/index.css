@@ -72,6 +72,11 @@ body {
   };
 }
 
+img.img-responsive {
+  width: 100%;
+  height: auto;
+}
+
 /* LIBRARY - END */
 
 /* CONTAINER - START */
@@ -244,6 +249,22 @@ div.video {
           width: 100%;
           height: 100%;
         }
+        & .capture-frame-container {
+          @apply (--transition-all);
+          position: absolute;
+          top: .5rem;
+          right: .5rem;
+          opacity: 0;
+          &.mouse-moved {
+            opacity: 1;
+          }
+          & button {
+            border-width: 2px;
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
       }
       & .video-preloader {
         position: absolute;
@@ -295,6 +316,16 @@ div.video {
 }
 
 /* VIDEO - END */
+
+/* VIDEO NOTE FORM - START */
+
+form.video-note-form {
+  & .img-container {
+    margin-bottom: 1rem;
+  }
+}
+
+/* VIDEO NOTE FORM - END */
 
 /* LOGIN - START */
 

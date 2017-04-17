@@ -8,12 +8,14 @@ import auth from './authReducer';
 import sidebar from './sidebarReducer';
 import searchPage from './searchPageReducer';
 import videoPage from './videoPageReducer';
+import videoNote from './videoNoteReducer';
 
 const rootReducer = combineReducers({
   auth,
   sidebar,
   searchPage,
   videoPage,
+  videoNote,
   routing: routerReducer,
 });
 

@@ -6,11 +6,7 @@ import React, { PropTypes } from 'react';
 import VideoNote from './VideoNote.jsx';
 
 const VideoNotes = () => (
-  <div className="video-notes-container">
-    { [1, 2, 3, 4, 5].map((value) => (
-      <VideoNote key={value} />
-      )) }
-  </div>
+  <div className="video-notes-container" />
 );
 
 VideoNotes.propTypes = {};

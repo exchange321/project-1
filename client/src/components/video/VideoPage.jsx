@@ -9,6 +9,7 @@ import { routerActions } from 'react-router-redux';
 
 import VideoPlayback from './videoPlayback/index.jsx';
 import VideoNotes from './videoNotes/index.jsx';
+import VideoNoteForm from './videoNoteForm/index.jsx';
 
 import AccordionCard from '../common/AccordionCard.jsx';
 
@@ -114,6 +115,7 @@ class VideoPage extends Component {
             </div>
           </div>
         </div>
+        <VideoNoteForm />
       </div>
     );
   }
