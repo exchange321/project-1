@@ -10,7 +10,7 @@ const videoNotesReducer = (state = initialState.videoNotes, action) => {
       return {
         ...state,
         notes: action.notes,
-      }
+      };
     }
 
     default: {

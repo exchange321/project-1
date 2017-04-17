@@ -44,6 +44,16 @@ export const handleQuerySubmit = () => (
   })
 );
 
+export const registerSpellingSuggestions = spelling => ({
+  type: SEARCH_PAGE_ACTIONS.REGISTER_SPELLING_SUGGESTIONS,
+  spelling,
+});
+
+export const registerCaretPosition = caretPosition => ({
+  type: SEARCH_PAGE_ACTIONS.REGISTER_CARET_POSITION,
+  caretPosition,
+});
+
 export const handleInputBoxFocus = caretPosition => (
   (dispatch, getState) => {
     const {
@@ -60,7 +70,7 @@ export const handleInputBoxFocus = caretPosition => (
           dispatch(registerSpellingSuggestions({
             show: true,
             wordPos,
-            pos: $(`.${wordClass}`).position().left,
+            pos: window.$(`.${wordClass}`).position().left,
             suggestions: spelling.suggestions,
           }));
         } else {
@@ -77,16 +87,6 @@ export const handleInputBoxFocus = caretPosition => (
     }
   }
 );
-
-export const registerCaretPosition = caretPosition => ({
-  type: SEARCH_PAGE_ACTIONS.REGISTER_CARET_POSITION,
-  caretPosition,
-});
-
-export const registerSpellingSuggestions = spelling => ({
-  type: SEARCH_PAGE_ACTIONS.REGISTER_SPELLING_SUGGESTIONS,
-  spelling,
-});
 
 export const handleApplyingSuggestion = (wordPos, word) => (
   (dispatch, getState) => new Promise((resolve) => {

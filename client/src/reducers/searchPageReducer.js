@@ -38,7 +38,7 @@ const searchPageReducer = (state = initialState.searchPage, action) => {
           show: action.spelling.show,
           wordPos: action.spelling.show ? action.spelling.wordPos : 0,
           pos: action.spelling.show ? action.spelling.pos : 0,
-          suggestions: action.spelling.show ? action.spelling.suggestions: [],
+          suggestions: action.spelling.show ? action.spelling.suggestions : [],
         },
       };
     }

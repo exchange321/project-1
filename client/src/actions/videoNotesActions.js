@@ -12,7 +12,12 @@ export const registerNotes = notes => ({
 export const handleNoteClick = noteId => (
   (dispatch, getState) => {
     const { notes } = getState().videoNotes;
-    const { _id: id, imgUrl, title, note } = notes.filter(note => note._id === noteId)[0];
+    const {
+      _id: id,
+      imgUrl,
+      title,
+      note,
+    } = notes.filter(noteItem => noteItem._id === noteId)[0]; // eslint-disable-line no-underscore-dangle, max-len
     dispatch(videoNoteActions.registerEditingNote({
       id,
       imgUrl,

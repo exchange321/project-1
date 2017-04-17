@@ -19,13 +19,13 @@ export const registerEditingNote = note => ({
   note,
 });
 
-export const handleCreateNewNote = (imgUrl) => ({
+export const handleCreateNewNote = imgUrl => ({
   type: VIDEO_NOTE_ACTIONS.HANDLE_CREATE_NEW_NOTE,
   imgUrl,
 });
 
 export const handleDeleteNote = noteId => (
-  dispatch => new Promise((resolve, reject) => {
+  () => new Promise((resolve, reject) => {
     app.service('notes').remove(noteId).then(() => {
       resolve();
     }).catch((err) => {
@@ -49,7 +49,7 @@ export const handleFormSubmit = () => (
         reject(err);
       });
     } else {
-      const userId = getState().auth.user._id;
+      const userId = getState().auth.user._id; // eslint-disable-line no-underscore-dangle
       const videoId = getState().videoPage.videoId;
       const { imgUrl, title, note } = getState().videoNote;
       const request = {
