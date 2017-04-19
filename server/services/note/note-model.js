@@ -33,6 +33,10 @@ const noteSchema = new Schema({
     type: String,
     required: true,
   },
+  filePath: {
+    type: String,
+    required: true,
+  },
   createdAt: {
     type: Date,
     'default': Date.now,

@@ -37,9 +37,10 @@ module.exports = function() {
         const id = shortid.generate();
         const imageFileName = `${id}-${videoId}.png`;
         const filePath = path.join(__dirname, '..', '..', '..', '..', 'assets', 'screenshots', imageFileName);
-        imageDataUri.outputFile(imgUrl, filePath).then(() => {
+        imageDataUri.outputFile(imgUrl, filePath).then((res) => {
           hook.data = Object.assign({}, hook.data, {
             imgUrl: `http://${hook.app.get('host')}:${hook.app.get('port')}/assets/screenshots/${imageFileName}`,
+            filePath: res,
           });
           resolve(hook);
         }).catch(() => {

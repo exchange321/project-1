@@ -6,6 +6,8 @@ const auth = require('feathers-authentication').hooks;
 
 const beforeCreate = require('./beforeCreate');
 const beforePatch = require('./beforePatch');
+const afterRemove = require('./afterRemove');
+const removeFilePath = require('./removeFilePath');
 
 exports.before = {
   all: [
@@ -26,11 +28,15 @@ exports.before = {
 };
 
 exports.after = {
-  all: [],
-  find: [],
+  all: [  ],
+  find: [
+    removeFilePath(),
+  ],
   get: [],
   create: [],
   update: [],
   patch: [],
-  remove: []
+  remove: [
+    afterRemove(),
+  ],
 };

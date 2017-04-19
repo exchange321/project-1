@@ -60,12 +60,6 @@ class VideoNotes extends Component {
         query: {
           userId,
           videoId,
-          $select: [
-            'time',
-            'imgUrl',
-            'title',
-            'note',
-          ],
           $sort: {
             'time': 1,
           },
