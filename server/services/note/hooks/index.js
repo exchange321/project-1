@@ -4,9 +4,9 @@ const globalHooks = require('../../../hooks/index');
 const hooks = require('feathers-hooks');
 const auth = require('feathers-authentication').hooks;
 
-const beforeCreate = require('./beforeCreate');
-const beforePatch = require('./beforePatch');
-const afterRemove = require('./afterRemove');
+const generateScreenshot = require('./generateScreenshot');
+const validation = require('./validation');
+const removeScreenshot = require('./removeScreenshot');
 const removeFilePath = require('./removeFilePath');
 
 exports.before = {
@@ -18,11 +18,12 @@ exports.before = {
   find: [],
   get: [],
   create: [
-    beforeCreate(),
+    validation(),
+    generateScreenshot(),
   ],
   update: [],
   patch: [
-    beforePatch(),
+    validation(),
   ],
   remove: []
 };
@@ -37,6 +38,6 @@ exports.after = {
   update: [],
   patch: [],
   remove: [
-    afterRemove(),
+    removeScreenshot(),
   ],
 };
