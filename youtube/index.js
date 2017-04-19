@@ -13,7 +13,7 @@ const baseParams = {
 
 const searchParams = query => ({
   ...baseParams,
-  maxResults: 10,
+  maxResults: 25,
   part: 'snippet',
   q: query,
   type: 'video',
