@@ -34,6 +34,7 @@ const VideoNoteReducer = (state = initialState.videoNote, action) => {
         ...state,
         show: true,
         newNote: true,
+        time: action.time,
         imgUrl: action.imgUrl,
       };
     }

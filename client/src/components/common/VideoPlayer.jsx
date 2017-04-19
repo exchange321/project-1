@@ -68,11 +68,12 @@ class VideoPlayer extends Component {
       },
     } = this.props;
     videoEl.pause();
+    const time = videoEl.currentTime;
     const canvas = document.createElement("canvas");
     canvas.width = videoEl.videoWidth;
     canvas.height = videoEl.videoHeight;
     canvas.getContext('2d').drawImage(videoEl, 0, 0, canvas.width, canvas.height);
-    handleCreateNewNote(canvas.toDataURL());
+    handleCreateNewNote(time, canvas.toDataURL());
   };
 
   render() {

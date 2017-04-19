@@ -17,6 +17,10 @@ const noteSchema = new Schema({
     type: String,
     required: true,
   },
+  time: {
+    type: Number,
+    required: true,
+  },
   imgUrl: {
     type: String,
     required: true,

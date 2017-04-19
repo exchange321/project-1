@@ -61,10 +61,14 @@ class VideoNotes extends Component {
           userId,
           videoId,
           $select: [
+            'time',
             'imgUrl',
             'title',
             'note',
           ],
+          $sort: {
+            'time': 1,
+          },
         },
         rx: {
           listStrategy: 'always',

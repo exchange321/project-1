@@ -40,6 +40,7 @@ export default {
     show: false,
     newNote: false,
     id: '',
+    time: 0,
     imgUrl: '',
     title: '',
     note: '',

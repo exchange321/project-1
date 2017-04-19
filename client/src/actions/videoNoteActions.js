@@ -19,8 +19,9 @@ export const registerEditingNote = note => ({
   note,
 });
 
-export const handleCreateNewNote = imgUrl => ({
+export const handleCreateNewNote = (time, imgUrl) => ({
   type: VIDEO_NOTE_ACTIONS.HANDLE_CREATE_NEW_NOTE,
+  time,
   imgUrl,
 });
 
@@ -51,10 +52,11 @@ export const handleFormSubmit = () => (
     } else {
       const userId = getState().auth.user._id; // eslint-disable-line no-underscore-dangle
       const videoId = getState().videoPage.videoId;
-      const { imgUrl, title, note } = getState().videoNote;
+      const { time, imgUrl, title, note } = getState().videoNote;
       const request = {
         videoId,
         userId,
+        time,
         imgUrl,
         title,
         note,
