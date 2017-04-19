@@ -56,7 +56,9 @@ class VideoPlayer extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.showModal && !nextProps.showModal) {
-      this.props.videoEl.play();
+      if (this.props.videoEl.duration !== this.props.videoEl.currentTime) {
+        this.props.videoEl.play();
+      }
     }
   }
 
