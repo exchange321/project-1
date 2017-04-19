@@ -90,12 +90,14 @@ class Sidebar extends Component {
           <MenuItem
             onClick={e => this.handleRedirect()}
             rightIcon={<i className="fa fa-history" aria-hidden="true" />}
+            disabled
           >
             History
           </MenuItem>
           <MenuItem
             onClick={e => this.handleRedirect()}
             rightIcon={<i className="fa fa-heart" aria-hidden="true" />}
+            disabled
           >
             Favorite
           </MenuItem>
