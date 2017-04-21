@@ -94,7 +94,7 @@ class VideoPage extends Component {
                 headingId="video-description-accordion-heading"
                 collapseId="video-description-accordion-collapse"
                 headingText="Description"
-                isDefault={true}
+                isDefault={false}
               >
                 <div className="video-info">
                   <div className="video-title">
@@ -110,7 +110,7 @@ class VideoPage extends Component {
                 headingId="video-notes-accordion-heading"
                 collapseId="video-notes-accordion-collapse"
                 headingText="Notes"
-                isDefault={false}
+                isDefault={true}
               >
                 <VideoNotes />
               </AccordionCard>
