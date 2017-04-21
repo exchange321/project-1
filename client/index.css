@@ -85,6 +85,10 @@ img.img-responsive {
   padding-top: 7.5rem;
 }
 
+.searching, .searching:hover, .searching:focus {
+  background-color: #ddd;
+}
+
 /* LIBRARY - END */
 
 /* CONTAINER - START */

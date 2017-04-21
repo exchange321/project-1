@@ -83,12 +83,18 @@ class SearchBar extends Component {
         push,
       },
     } = this.props;
+    $('#search-bar-query').addClass("progress-bar-striped progress-bar-animated searching").prop('disabled', 'disabled');
+    $('.btn-search-submit').addClass("progress-bar-striped progress-bar-animated searching").prop('disabled', 'disabled');
     handleQuerySubmit().then(() => {
+      $('#search-bar-query').removeClass("progress-bar-striped progress-bar-animated searching").prop('disabled', '');
+      $('.btn-search-submit').removeClass("progress-bar-striped progress-bar-animated searching").prop('disabled', '');
       $('.search-bar-outer').blur().children().blur();
       if (pathname !== '/') {
         push('/');
       }
     }).catch((err) => {
+      $('#search-bar-query').removeClass("progress-bar-striped progress-bar-animated searching").prop('disabled', '');
+      $('.btn-search-submit').removeClass("progress-bar-striped progress-bar-animated searching").prop('disabled', '');
       handleQueryChange("");
       toastr.error(err.message);
     });
@@ -183,7 +189,7 @@ class SearchBar extends Component {
                 }
               </div>
               <span className="input-group-btn">
-                  <button type="submit" className="btn btn-secondary"><i className="fa fa-search" /></button>
+                  <button type="submit" className="btn btn-secondary btn-search-submit"><i className="fa fa-search" /></button>
               </span>
             </div>
           </form>
