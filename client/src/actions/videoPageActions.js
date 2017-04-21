@@ -21,7 +21,7 @@ export const registerVideo = videoId => (
         video: {
           title: item.snippet.title,
           description: item.snippet.description,
-          thumbnail: item.snippet.thumbnails.default.url,
+          thumbnail: item.snippet.thumbnails.medium.url || item.snippet.thumbnails.high.url || item.snippet.thumbnails.default.url,
         },
       });
     }).catch((err) => {
