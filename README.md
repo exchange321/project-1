@@ -31,6 +31,7 @@
         - [x] Frame Capture
         - [x] Input Notes
         - [x] Store Notes on Server
+    - [x] Favorite
 
 ## Todos
 - [ ] General Functions
@@ -49,6 +50,5 @@
     - [ ] Note-taking
         - [ ] (New) Print Notes
     - [ ] Playback History
-    - [ ] Favorite
 
 ## Project Logs
