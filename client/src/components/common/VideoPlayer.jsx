@@ -7,20 +7,34 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { handleCreateNewNote } from '../../actions/videoNoteActions';
+import { handleFavoriteButtonClick } from '../../actions/videoPageActions';
 
 @connect(
-  ({ videoNote: { show: showModal } }) => ({
+  ({
+     videoNote: {
+       show: showModal,
+     },
+    videoPage: {
+       favorite,
+    },
+  }) => ({
     showModal,
+    favorite,
   }),
   dispatch => ({
     videoNoteActions: bindActionCreators({ handleCreateNewNote }, dispatch),
+    videoPageActions: bindActionCreators({ handleFavoriteButtonClick }, dispatch),
   }),
 )
 class VideoPlayer extends Component {
   static propTypes = {
     showModal: PropTypes.bool.isRequired,
+    favorite: PropTypes.bool.isRequired,
     videoNoteActions: PropTypes.shape({
       handleCreateNewNote: PropTypes.func.isRequired,
+    }).isRequired,
+    videoPageActions: PropTypes.shape({
+      handleFavoriteButtonClick: PropTypes.func.isRequired,
     }).isRequired,
   };
 
@@ -84,7 +98,11 @@ class VideoPlayer extends Component {
       children,
       videoEl,
       videoNoteActions,
+      videoPageActions: {
+        handleFavoriteButtonClick,
+      },
       showModal,
+      favorite,
       ...restProps
     } = this.props;
     const {
@@ -95,8 +113,15 @@ class VideoPlayer extends Component {
         <video {...restProps}>
           { children }
         </video>
-        <div className={`capture-frame-container ${mouseMoving ? "mouse-moved" : ""}`}>
-          <button onClick={this.handleNoteTakingButtonClick} className="btn btn-outline-primary btn-lg"><i className="fa fa-sticky-note" /></button>
+        <div className={`over-screen screenshot-container ${mouseMoving ? "mouse-moved" : ""}`}>
+          <button onClick={this.handleNoteTakingButtonClick} className="btn btn-outline-primary btn-lg">
+            <i className="fa fa-sticky-note" />
+          </button>
+        </div>
+        <div className={`over-screen favorite-container ${mouseMoving ? "mouse-moved" : ""}`}>
+          <button onClick={handleFavoriteButtonClick} className={`btn btn-outline-danger btn-lg ${favorite ? 'active' : ''}`}>
+            <i className="fa fa-heart" aria-hidden="true" />
+          </button>
         </div>
       </div>
     );

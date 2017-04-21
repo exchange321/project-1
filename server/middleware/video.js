@@ -5,7 +5,7 @@ const youtubeDl = require('youtube-dl');
 
 module.exports = function(app) {
   return function(req, res) {
-    const videoId = req.query.v;
+    const { v: videoId, userId } = req.body;
     const videos = app.service('videos');
     videos.find({
       query:{
@@ -40,14 +40,14 @@ module.exports = function(app) {
                 recordVideo(app, req, res, videos, {
                   videoId,
                   filename,
-                });
+                }, userId, videoId);
               }
             });
           }
         });
       } else {
         const { filename } = data.data[0];
-        responseUrl(app, req, res, filename);
+        responseUrl(app, req, res, filename, userId, videoId);
       }
     }).catch(() => {
       responseError(res, 'We have encountered problems when accessing the video. Please try again.');
@@ -55,18 +55,28 @@ module.exports = function(app) {
   };
 };
 
-const recordVideo = (app, req, res, videos, videoInfo) => {
+const recordVideo = (app, req, res, videos, videoInfo, userId, videoId) => {
   videos.create(videoInfo).then(() => {
-    responseUrl(app, req, res, videoInfo.filename);
+    responseUrl(app, req, res, videoInfo.filename, userId, videoId);
   }).catch(() => {
     responseError(res, 'We have encountered problems when recording the video. Please try again.');
   });
 };
 
-const responseUrl = (app, req, res, filename) => {
-  res.status(200);
-  res.json({
-    url: `${req.protocol}://${app.get('host')}:${app.get('port')}/assets/videos/${filename}`,
+const responseUrl = (app, req, res, filename, userId, videoId) => {
+  app.service('favorites').find({
+    query: {
+      userId,
+      videoId,
+    },
+  }).then(({ total }) => {
+    res.status(200);
+    res.json({
+      url: `${req.protocol}://${app.get('host')}:${app.get('port')}/assets/videos/${filename}`,
+      favorite: total > 0,
+    });
+  }).catch(() => {
+    responseError(res, 'We have encountered problems when reading favorites. Please try again.');
   });
 };
 

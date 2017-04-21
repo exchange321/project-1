@@ -8,6 +8,7 @@ const generateScreenshot = require('./generateScreenshot');
 const validation = require('./validation');
 const removeScreenshot = require('./removeScreenshot');
 const removeFilePath = require('./removeFilePath');
+const setFavorite = require('./setFavorite');
 
 exports.before = {
   all: [
@@ -20,6 +21,7 @@ exports.before = {
   create: [
     validation(),
     generateScreenshot(),
+    setFavorite(),
   ],
   update: [],
   patch: [

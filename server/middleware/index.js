@@ -11,7 +11,7 @@ module.exports = function() {
   // just like Express the order matters, so error
   // handling middleware should go last.
   const app = this;
-  app.get('/video', video(app));
+  app.post('/video', video(app));
 
   app.use(notFound());
   app.use(logger(app));

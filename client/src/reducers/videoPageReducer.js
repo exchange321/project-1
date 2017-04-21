@@ -35,6 +35,13 @@ const videoPageReducer = (state = initialState.videoPage, action) => {
       return state;
     }
 
+    case VIDEO_PAGE_ACTIONS.SET_FAVORITE_STATE: {
+      return {
+        ...state,
+        favorite: action.favorite,
+      };
+    }
+
     case VIDEO_PAGE_ACTIONS.RESET_VIDEO_PAGE: {
       return initialState.videoPage;
     }

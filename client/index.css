@@ -259,16 +259,24 @@ div.video {
           width: 100%;
           height: 100%;
         }
-        & .capture-frame-container {
+        & .over-screen {
           @apply (--transition-all);
           position: absolute;
-          top: .5rem;
           right: .5rem;
           opacity: 0;
           &.mouse-moved {
             opacity: 1;
           }
+          &.screenshot-container {
+            top: .5rem;
+          }
+          &.favorite-container {
+            top: 5rem;
+          }
           & button {
+            width: 4rem;
+            text-align: center;
+            padding: 1rem;
             border-width: 2px;
             &:hover {
               cursor: pointer;

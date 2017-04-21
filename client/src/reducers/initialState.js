@@ -28,6 +28,7 @@ export default {
     src: '',
     isVideoLoaded: false,
     isOnPage: false,
+    favorite: false,
     video: {
       title: '',
       description: '',

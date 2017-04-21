@@ -3,6 +3,7 @@ const authentication = require('./authentication');
 const user = require('./user');
 const video = require('./video');
 const note = require('./note');
+const favorite = require('./favorite');
 const mongoose = require('mongoose');
 module.exports = function() {
   const app = this;
@@ -14,4 +15,5 @@ module.exports = function() {
   app.configure(user);
   app.configure(video);
   app.configure(note);
+  app.configure(favorite);
 };

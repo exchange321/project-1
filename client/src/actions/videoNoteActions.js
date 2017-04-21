@@ -3,6 +3,7 @@
  */
 import { VIDEO_NOTE_ACTIONS } from './actionTypes';
 import app from '../feathers';
+import { setFavoriteState } from './videoPageActions'
 
 export const handleModalToggle = () => ({
   type: VIDEO_NOTE_ACTIONS.HANDLE_MODAL_TOGGLE,
@@ -62,6 +63,23 @@ export const handleFormSubmit = () => (
         note,
       };
       app.service('notes').create(request).then(() => {
+        app.service('favorites').find({
+          query: {
+            videoId,
+            userId,
+          },
+        }).then(({ total }) => {
+          if (total < 1) {
+            return app.service('favorites').create({
+              videoId,
+              userId,
+            });
+          } else {
+            resolve();
+          }
+        });
+      }).then(() => {
+        dispatch(setFavoriteState(true));
         resolve();
       }).catch((err) => {
         reject(err);
