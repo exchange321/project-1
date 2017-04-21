@@ -17,6 +17,7 @@
     - [ ] Search Bar
         - [x] Initialize Search Bar
         - [x] Spell Auto-suggestion
+        - [x] Emoji in Suggestions
     - [x] Search Result
         - [x] Initialize Search Result
         - [x] Display Information
@@ -38,7 +39,6 @@
     - [ ] Eye-Tracking Functions
 - [ ] Search Functions
     - [ ] Search Bar
-        - [ ] Emoji in Suggestions
         - [ ] Save History
     - [ ] Search Result
         - [ ] (New) Access Video Info on Server First
