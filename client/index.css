@@ -81,6 +81,10 @@ img.img-responsive {
   width: auto;
 }
 
+.page {
+  padding-top: 7.5rem;
+}
+
 /* LIBRARY - END */
 
 /* CONTAINER - START */
@@ -189,13 +193,12 @@ div.search-bar-container {
   }
 }
 
-div.search-result-container {
-  padding-top: 7.5rem;
+div.search-result-container, div.favorites-container {
   @media (--md-only) {
     display: flex;
     flex-wrap: wrap;
   }
-  & .search-result {
+  & .list-result {
     z-index: 1;
     position: relative;
     overflow: hidden;
@@ -233,7 +236,6 @@ div.search-result-container {
 /* VIDEO - START */
 
 div.video {
-  padding-top: 7.5rem;
   & .container {
     padding-left: 30px;
     padding-right: 30px;

@@ -84,7 +84,7 @@ class VideoPage extends Component {
       },
     } = this.props;
     return (
-      <div className="video">
+      <div className="video page">
         <VideoPlayback src={src} isVideoLoaded={isVideoLoaded} />
         <div id="video-accordion" role="tablist" aria-multiselectable="true">
           <div className="container">

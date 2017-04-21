@@ -11,6 +11,7 @@ import Sidebar from './sidebar/index.jsx';
 
 import SearchPage from './search/SearchPage.jsx';
 import VideoPage from './video/VideoPage.jsx';
+import FavoritePage from './favorite/FavoritePage.jsx';
 import LoginPage from './login/LoginPage.jsx';
 import NotFoundPage from './404/NotFoundPage.jsx';
 
@@ -36,6 +37,7 @@ const App = ({ location }) => {
             <LoginPage success={false} />
           )} />
           <Route exact path="/watch" component={PageForUserOnly(VideoPage)} />
+          <Route exact path="/favorite" component={PageForUserOnly(FavoritePage)} />
           {/*<Route exact path="/404" component={NotFoundPage} />*/}
           {/*<Redirect to="/404" />*/}
           <Route path="*" component={NotFoundPage} />

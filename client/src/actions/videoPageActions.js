@@ -128,8 +128,10 @@ export const deleteFavorite = () => (
       },
     } = getState();
     app.service('favorites').remove(null, {
-      videoId,
-      userId,
+      query: {
+        videoId,
+        userId,
+      },
     }).then(() => {
       dispatch(setFavoriteState(false));
       toastr.success('Video has been removed from favorite list.');

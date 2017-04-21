@@ -64,6 +64,7 @@ class VideoPlayer extends Component {
       this.setState({
         mouseMoving: false,
       });
+      clearTimeout(this.mousemoveCooldown);
       this.mousemoveCooldown = null;
     });
   }
@@ -74,6 +75,12 @@ class VideoPlayer extends Component {
         this.props.videoEl.play();
       }
     }
+  }
+
+  componentWillUnmount() {
+    $('.video-container').unbind('mousemove').unbind('mouseleave');
+    clearTimeout(this.mousemoveCooldown);
+    this.mousemoveCooldown = null;
   }
 
   handleNoteTakingButtonClick = () => {

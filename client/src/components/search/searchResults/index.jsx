@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { routerActions } from 'react-router-redux';
 
-import SearchResult from './SearchResult.jsx';
+import ListResult from '../../common/ListResult.jsx';
 
 @connect(
   ({ searchPage: { results } }) => ({
@@ -51,9 +51,9 @@ class SearchResults extends Component {
   render() {
     const { results } = this.props;
     return (
-      <div className="search-result-container clearfix">
+      <div className="search-result-container page clearfix">
         { results.map((result, key) => (
-          <SearchResult key={key} className={`clear-${key % 2}`} {...(this.getInfoFromResult(result))} handleResultClick={this.handleSearchResultClick} />
+          <ListResult key={key} className={`clear-${key % 2}`} {...(this.getInfoFromResult(result))} handleResultClick={this.handleSearchResultClick} />
         )) }
       </div>
     );

@@ -48,4 +48,7 @@ export default {
     note: '',
     errors: {},
   },
+  favoritePage: {
+    favorites: [],
+  },
 };

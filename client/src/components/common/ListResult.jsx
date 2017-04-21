@@ -3,8 +3,8 @@
  */
 import React, { PropTypes } from 'react';
 
-const SearchResult = ({ className, title, description, videoId, thumbnail, handleResultClick }) => (
-  <div className={`search-result clearfix ${className}`} onClick={(e) => handleResultClick(videoId)}>
+const ListResult = ({ className, title, description, videoId, thumbnail, handleResultClick }) => (
+  <div className={`list-result clearfix ${className}`} onClick={(e) => handleResultClick(videoId)}>
     <div className="row">
       <div className="thumbnail col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
         <img className="img-fluid" width="120" height="90" src={thumbnail} alt={title} />
@@ -21,7 +21,7 @@ const SearchResult = ({ className, title, description, videoId, thumbnail, handl
   </div>
 );
 
-SearchResult.propTypes = {
+ListResult.propTypes = {
   className: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
@@ -30,4 +30,4 @@ SearchResult.propTypes = {
   handleResultClick: PropTypes.func.isRequired,
 };
 
-export default SearchResult;
+export default ListResult;

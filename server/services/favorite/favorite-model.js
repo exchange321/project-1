@@ -13,7 +13,7 @@ const favoriteSchema = new Schema({
   videoId: { type: String, required: true },
   thumbnail: { type: String, required: true },
   title: { type: String, required: true },
-  description: { type: String, required: true },
+  description: { type: String },
   createdAt: { type: Date, 'default': Date.now },
   updatedAt: { type: Date, 'default': Date.now }
 });
