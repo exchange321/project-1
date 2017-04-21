@@ -22,7 +22,7 @@ class SpellSuggestion extends Component {
         left: pos,
       }}>
         {
-          suggestions.map(({ word }, key) => (
+          suggestions.map(({ word, emoji }, key) => (
             <button
               key={key}
               type="button"
@@ -30,6 +30,11 @@ class SpellSuggestion extends Component {
               onClick={e => onSuggestionClick(wordPos, word)}
             >
               { word }
+              {
+                emoji ? (
+                  <span className="emoji">{ emoji }</span>
+                ) : null
+              }
             </button>
           ))
         }

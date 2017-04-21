@@ -4,6 +4,7 @@
 /* eslint-disable react/jsx-filename-extension, react/no-array-index-key */
 
 import React from 'react';
+import getEmoji from 'emoji-from-word';
 import { SEARCH_PAGE_ACTIONS } from './actionTypes';
 import { search } from '../../../youtube';
 import { getWordAt, getWordSuggestion, dissembleSentence } from '../../../helpers';
@@ -67,6 +68,13 @@ export const handleInputBoxFocus = caretPosition => (
       if (word.search(/[,. ]/) < 0 && word.length > 0) {
         const spelling = getWordSuggestion(word);
         if (!spelling.found && spelling.suggestions.length > 0) {
+          const suggestions = spelling.suggestions.map((suggestion) => {
+            const { score, emoji } = getEmoji(suggestion.word);
+            if(score >= 1) {
+              suggestion.emoji = emoji.char;
+            }
+            return suggestion;
+          });
           dispatch(registerSpellingSuggestions({
             show: true,
             wordPos,

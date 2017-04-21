@@ -29,6 +29,7 @@
     "colors": "^1.1.2",
     "compression": "^1.6.2",
     "cors": "^2.8.1",
+    "emoji-from-word": "^1.2.7",
     "feathers": "^2.1.1",
     "feathers-authentication": "^0.7.12",
     "feathers-client": "^1.9.0",

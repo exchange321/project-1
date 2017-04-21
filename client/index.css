@@ -173,6 +173,12 @@ div.search-bar-container {
           & .list-group-item {
             padding-top: .3rem;
             padding-bottom: .3rem;
+            padding-right: 2.5rem;
+            position: relative;
+            & span.emoji {
+              position: absolute;
+              right: .75rem;
+            }
           }
           & .list-group-item-action:hover {
             cursor: pointer;
