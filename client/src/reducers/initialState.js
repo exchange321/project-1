@@ -32,6 +32,7 @@ export default {
     video: {
       title: '',
       description: '',
+      thumbnail: '',
     },
   },
   videoNotes: {

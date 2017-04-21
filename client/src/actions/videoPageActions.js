@@ -21,6 +21,7 @@ export const registerVideo = videoId => (
         video: {
           title: item.snippet.title,
           description: item.snippet.description,
+          thumbnail: item.snippet.thumbnails.default.url,
         },
       });
     }).catch((err) => {
@@ -63,6 +64,83 @@ export const registerVideo = videoId => (
   }
 );
 
+export const setFavoriteState = favorite => ({
+  type: VIDEO_PAGE_ACTIONS.SET_FAVORITE_STATE,
+  favorite,
+});
+
+export const createFavorite = () => (
+  (dispatch, getState) => new Promise((resolve, reject) => {
+    const {
+      videoPage: {
+        videoId,
+        video,
+      },
+      auth: {
+        user: {
+          _id: userId,
+        },
+      },
+    } = getState();
+    app.service('favorites').find({
+      query: {
+        videoId,
+        userId,
+      },
+    }).then(({ total }) => {
+      if (total < 1) {
+        if (video.description.length > 100) {
+          video.description = video.description.substring(0, 100);
+          video.description += '...';
+        }
+        return app.service('favorites').create({
+          videoId,
+          userId,
+          ...video,
+        });
+      } else {
+        return false;
+      }
+    }).then((state) => {
+      dispatch(setFavoriteState(true));
+      if (state) {
+        toastr.success('Video has been added to favorite list.');
+      }
+      resolve();
+    }).catch((err) => {
+      toastr.error(err.message);
+      reject();
+    });
+  })
+);
+
+export const deleteFavorite = () => (
+  (dispatch, getState) => new Promise((resolve, reject) => {
+    const {
+      videoPage: {
+        favorite,
+        videoId,
+      },
+      auth: {
+        user: {
+          _id : userId,
+        },
+      },
+    } = getState();
+    app.service('favorites').remove(null, {
+      videoId,
+      userId,
+    }).then(() => {
+      dispatch(setFavoriteState(false));
+      toastr.success('Video has been removed from favorite list.');
+      resolve();
+    }).catch((err) => {
+      toastr.error(err.message);
+      reject(err);
+    });
+  })
+);
+
 export const handleFavoriteButtonClick = () => (
   (dispatch, getState) => {
     const {
@@ -77,42 +155,12 @@ export const handleFavoriteButtonClick = () => (
       },
     } = getState();
     if (favorite) {
-      app.service('favorites').remove(null, {
-        videoId,
-        userId,
-      }).then(() => {
-        dispatch(setFavoriteState(false));
-        toastr.success('Video has been removed from favorite list.');
-      }).catch((err) => {
-        toastr.error(err.message);
-      });
+      dispatch(deleteFavorite());
     } else {
-      app.service('favorites').find({
-        query: {
-          videoId,
-          userId,
-        },
-      }).then(({ total }) => {
-        if (total < 1) {
-          return app.service('favorites').create({
-            videoId,
-            userId,
-          });
-        }
-      }).then(() => {
-        dispatch(setFavoriteState(true));
-        toastr.success('Video has been added to favorite list.');
-      }).catch((err) => {
-        toastr.error(err.message);
-      });
+      dispatch(createFavorite());
     }
   }
 );
-
-export const setFavoriteState = favorite => ({
-  type: VIDEO_PAGE_ACTIONS.SET_FAVORITE_STATE,
-  favorite,
-});
 
 export const resetVideoPage = () => ({
   type: VIDEO_PAGE_ACTIONS.RESET_VIDEO_PAGE,
