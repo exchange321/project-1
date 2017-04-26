@@ -13,11 +13,12 @@
 - [ ] General Functions
     - [x] User Authentication (Google and Facebook)
     - [x] Page and Element Authorization
-- [ ] Search Functions
-    - [ ] Search Bar
+- [x] Search Functions
+    - [x] Search Bar
         - [x] Initialize Search Bar
         - [x] Spell Auto-suggestion
         - [x] Emoji in Suggestions
+        - [x] Save History
     - [x] Search Result
         - [x] Initialize Search Result
         - [x] Display Information
@@ -39,9 +40,6 @@
 - [ ] General Functions
     - [ ] WCAG 2.0
     - [ ] On-Screen Instructions
-- [ ] Search Functions
-    - [ ] Search Bar
-        - [ ] Save History
 - [ ] Video Functions
     - [ ] Fetch Video
         - [ ] (New) Capture 3 Frames from Downloaded Videos
