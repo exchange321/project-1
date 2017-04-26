@@ -31,9 +31,7 @@ exports.before = {
     disabled(),
   ],
   remove: [
-    auth.verifyToken(),
-    auth.populateUser(),
-    auth.restrictToAuthenticated(),
+    disabled(),
   ]
 };
 
