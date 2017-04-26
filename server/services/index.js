@@ -4,6 +4,7 @@ const user = require('./user');
 const video = require('./video');
 const note = require('./note');
 const favorite = require('./favorite');
+const history = require('./history');
 const mongoose = require('mongoose');
 module.exports = function() {
   const app = this;
@@ -16,4 +17,5 @@ module.exports = function() {
   app.configure(video);
   app.configure(note);
   app.configure(favorite);
+  app.configure(history);
 };
