@@ -27,6 +27,7 @@ module.exports = function() {
               }
               hook.result.data[key].description = data[0].description;
               hook.result.data[key].thumbnail = data[0].thumbnail;
+              hook.result.data[key].preview = data[0].preview;
             }
             if (processed >= hook.result.data.length) {
               resolve(hook);

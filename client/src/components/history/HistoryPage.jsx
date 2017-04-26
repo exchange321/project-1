@@ -85,6 +85,7 @@ class HistoryPage extends Component {
               key={key}
               className={`clear-${key % 2}`}
               { ...favorite }
+              usePreview={true}
               handleResultClick={this.handleHistoryClick}
             />
           ))

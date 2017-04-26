@@ -2,6 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const youtubeDl = require('youtube-dl');
+const ffmpeg = require('fluent-ffmpeg');
 
 module.exports = function(app) {
   return function(req, res) {
@@ -66,10 +67,19 @@ module.exports = function(app) {
 };
 
 const recordVideo = (app, req, res, videos, videoInfo, userId, videoId) => {
-  videos.create(videoInfo).then(() => {
-    responseUrl(app, req, res, videoInfo.filename, userId, videoId);
-  }).catch(() => {
-    responseError(res, 'We have encountered problems when recording the video. Please try again.');
+  ffmpeg(path.join(__dirname, '..', '..', 'assets', 'videos', videoInfo.filename)).on('error', (err) => {
+    console.log(err.message);
+  }).on('filenames', (filenames) => {
+    videoInfo.preview = filenames.map((filename) => `${req.protocol}://${app.get('host')}:${app.get('port')}/assets/previews/${filename}`)
+    videos.create(videoInfo).then(() => {
+      responseUrl(app, req, res, videoInfo.filename, userId, videoId);
+    }).catch(() => {
+      responseError(res, 'We have encountered problems when recording the video. Please try again.');
+    });
+  }).screenshots({
+    count: 3,
+    filename: '%f-%s.png',
+    folder: path.join(__dirname, '..', '..', 'assets', 'previews'),
   });
 };
 

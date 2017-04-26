@@ -40,6 +40,7 @@
     "feathers-reactive": "^0.4.1",
     "feathers-rest": "^1.7.1",
     "feathers-socketio": "^1.5.2",
+    "fluent-ffmpeg": "^2.1.2",
     "font-awesome": "^4.7.0",
     "history": "^4.6.1",
     "image-data-uri": "^1.0.0",

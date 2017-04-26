@@ -13,6 +13,12 @@ const videoSchema = new Schema({
   title: { type: String, required: true },
   description: { type: String },
   thumbnail: { type: String, required: true },
+  preview: [
+    {
+      type: String,
+      required: true,
+    }
+  ],
   filename: { type: String, required: true }
 });
 

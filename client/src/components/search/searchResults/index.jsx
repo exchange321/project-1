@@ -53,7 +53,13 @@ class SearchResults extends Component {
     return (
       <div className="search-result-container page clearfix">
         { results.map((result, key) => (
-          <ListResult key={key} className={`clear-${key % 2}`} {...(this.getInfoFromResult(result))} handleResultClick={this.handleSearchResultClick} />
+          <ListResult
+            key={key}
+            className={`clear-${key % 2}`}
+            {...(this.getInfoFromResult(result))}
+            usePreview={false}
+            handleResultClick={this.handleSearchResultClick}
+          />
         )) }
       </div>
     );

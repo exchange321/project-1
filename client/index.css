@@ -225,6 +225,38 @@ div.search-result-container, div.favorites-container, div.histories-container {
         margin-bottom: 1rem;
       }
     }
+    & .result-info {
+      &.result-info-with-preview {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        & .result-preview {
+          display: flex;
+          @media (--lg) {
+            justify-content: space-between;
+          }
+          @media (--xs-md) {
+            justify-content: center;
+            flex-wrap: wrap;
+          }
+          & .preview-img-container {
+            @media (--lg) {
+              flex: 0 0 30%;
+              max-width: 33%;
+            }
+            @media (--xs-md) {
+              flex: 0 0 40%;
+              margin: .5rem;
+            }
+          }
+        }
+        @media (--xs-md) {
+          & .result-title {
+            text-align: center;
+          }
+        }
+      }
+    }
     @media (--sm-only) {
       & .result-info {
         & .result-title {
