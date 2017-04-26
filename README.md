@@ -27,28 +27,32 @@
     - [ ] Fetch Video
         - [x] Download Video on Server
         - [x] Stream Video from Server
+        - [x] (New) Store Fetched Video's Info
     - [ ] Note-taking
         - [x] Frame Capture
         - [x] Input Notes
         - [x] Store Notes on Server
     - [x] Favorite
+    - [x] Playback History
 
 ## Todos
 - [ ] General Functions
     - [ ] WCAG 2.0
     - [ ] On-Screen Instructions
-    - [ ] Eye-Tracking Functions
 - [ ] Search Functions
     - [ ] Search Bar
         - [ ] Save History
-    - [ ] Search Result
-        - [ ] (New) Access Video Info on Server First
 - [ ] Video Functions
     - [ ] Fetch Video
-        - [ ] (New) Store Fetched Video's Info
         - [ ] (New) Capture 3 Frames from Downloaded Videos
     - [ ] Note-taking
         - [ ] (New) Print Notes
-    - [ ] Playback History
+    
+## Removed
+- [ ] General Functions
+    - [ ] ~~Eye-Tracking Functions~~
+- [ ] Search Functions
+    - [ ] Search Result
+        - [ ] ~~(New) Access Video Info on Server First~~
 
 ## Project Logs
