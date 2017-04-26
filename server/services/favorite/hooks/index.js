@@ -4,23 +4,44 @@ const globalHooks = require('../../../hooks/index');
 const hooks = require('feathers-hooks');
 const auth = require('feathers-authentication').hooks;
 
+const registerUse = require('./registerUser');
+const disabled = require('./disabled');
+const populateVideoInfo = require('./populateVideoInfo');
+
 exports.before = {
-  all: [
+  all: [],
+  find: [
     auth.verifyToken(),
     auth.populateUser(),
-    auth.restrictToAuthenticated()
+    auth.restrictToAuthenticated(),
   ],
-  find: [],
-  get: [],
-  create: [],
-  update: [],
-  patch: [],
-  remove: []
+  get: [
+    disabled(),
+  ],
+  create: [
+    auth.verifyToken(),
+    auth.populateUser(),
+    auth.restrictToAuthenticated(),
+    registerUse(),
+  ],
+  update: [
+    disabled(),
+  ],
+  patch: [
+    disabled(),
+  ],
+  remove: [
+    auth.verifyToken(),
+    auth.populateUser(),
+    auth.restrictToAuthenticated(),
+  ]
 };
 
 exports.after = {
   all: [],
-  find: [],
+  find: [
+    populateVideoInfo(),
+  ],
   get: [],
   create: [],
   update: [],

@@ -54,7 +54,6 @@ class FavoritePage extends Component {
       this.favorites = app.service('favorites').find({
         query: {
           userId,
-          $select: ['videoId', 'title', 'description', 'thumbnail'],
         },
         rx: {
           listStrategy: 'always',

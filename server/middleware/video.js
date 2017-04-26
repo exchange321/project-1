@@ -5,6 +5,7 @@ const youtubeDl = require('youtube-dl');
 
 module.exports = function(app) {
   return function(req, res) {
+
     const { v: videoId, userId } = req.body;
     const videos = app.service('videos');
     videos.find({
@@ -22,12 +23,18 @@ module.exports = function(app) {
             const file = path.join(__dirname, '..', '..', 'assets', 'videos', filename);
             const video = youtubeDl(url, ['-f', 'best[filesize <=? 20M][height <= 480][ext=mp4]']);
             let error = false;
+            let videoInfo = {};
             video.on('info', (info) => {
               if (info.size > 20000000) {
                 video.emit('error', {
                   message: 'The video is too long. Please try other videos.',
                 });
               } else {
+                videoInfo = {
+                  title: info.title,
+                  description: info.description,
+                  thumbnail: info.thumbnail,
+                };
                 video.pipe(fs.createWriteStream(file));
               }
             });
@@ -40,6 +47,9 @@ module.exports = function(app) {
                 recordVideo(app, req, res, videos, {
                   videoId,
                   filename,
+                  title: videoInfo.title,
+                  description: videoInfo.description,
+                  thumbnail: videoInfo.thumbnail,
                 }, userId, videoId);
               }
             });

@@ -10,6 +10,9 @@ const Schema = mongoose.Schema;
 
 const videoSchema = new Schema({
   videoId: { type: String, required: true },
+  title: { type: String, required: true },
+  description: { type: String },
+  thumbnail: { type: String, required: true },
   filename: { type: String, required: true }
 });
 

@@ -74,7 +74,6 @@ export const createFavorite = () => (
     const {
       videoPage: {
         videoId,
-        video,
       },
       auth: {
         user: {
@@ -89,14 +88,9 @@ export const createFavorite = () => (
       },
     }).then(({ total }) => {
       if (total < 1) {
-        if (video.description.length > 100) {
-          video.description = video.description.substring(0, 100);
-          video.description += '...';
-        }
         return app.service('favorites').create({
           videoId,
           userId,
-          ...video,
         });
       } else {
         return false;
@@ -118,7 +112,6 @@ export const deleteFavorite = () => (
   (dispatch, getState) => new Promise((resolve, reject) => {
     const {
       videoPage: {
-        favorite,
         videoId,
       },
       auth: {
@@ -148,12 +141,6 @@ export const handleFavoriteButtonClick = () => (
     const {
       videoPage: {
         favorite,
-        videoId,
-      },
-      auth: {
-        user: {
-          _id : userId,
-        },
       },
     } = getState();
     if (favorite) {
