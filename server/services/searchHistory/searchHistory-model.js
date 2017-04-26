@@ -1,0 +1,19 @@
+'use strict';
+
+// searchHistory-model.js - A mongoose model
+// 
+// See http://mongoosejs.com/docs/models.html
+// for more of what you can do here.
+
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const searchHistorySchema = new Schema({
+  userId: { type: String, required: true },
+  query: { type: String, required: true },
+  createdAt: { type: Date, 'default': Date.now }
+});
+
+const searchHistoryModel = mongoose.model('searchHistory', searchHistorySchema);
+
+module.exports = searchHistoryModel;

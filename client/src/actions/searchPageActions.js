@@ -9,6 +9,8 @@ import { SEARCH_PAGE_ACTIONS } from './actionTypes';
 import { search } from '../../../youtube';
 import { getWordAt, getWordSuggestion, dissembleSentence } from '../../../helpers';
 
+import app from '../feathers';
+
 const registerQueryResults = results => ({
   type: SEARCH_PAGE_ACTIONS.REGISTER_QUERY_RESULTS,
   results,
@@ -36,6 +38,9 @@ export const handleQuerySubmit = () => (
     const { query } = getState().searchPage;
     if (query.length > 0) {
       search(query).then((results) => {
+        app.service('searchHistories').create({
+          query,
+        }).catch();
         dispatch(registerQueryResults(results));
         resolve();
       }).catch((err) => {

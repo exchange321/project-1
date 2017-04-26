@@ -6,14 +6,11 @@ const auth = require('feathers-authentication').hooks;
 
 const registerUser = require('../../helpers/registerUser');
 const disabled = require('../../helpers/disabled');
-const populateVideoInfo = require('../../helpers/populateVideoInfo');
 
 exports.before = {
   all: [],
   find: [
-    auth.verifyToken(),
-    auth.populateUser(),
-    auth.restrictToAuthenticated(),
+    disabled(),
   ],
   get: [
     disabled(),
@@ -31,17 +28,13 @@ exports.before = {
     disabled(),
   ],
   remove: [
-    auth.verifyToken(),
-    auth.populateUser(),
-    auth.restrictToAuthenticated(),
+    disabled(),
   ]
 };
 
 exports.after = {
   all: [],
-  find: [
-    populateVideoInfo(),
-  ],
+  find: [],
   get: [],
   create: [],
   update: [],

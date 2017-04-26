@@ -4,7 +4,7 @@ const globalHooks = require('../../../hooks/index');
 const hooks = require('feathers-hooks');
 const auth = require('feathers-authentication').hooks;
 
-const registerUse = require('../../helpers/registerUser');
+const registerUser = require('../../helpers/registerUser');
 const disabled = require('../../helpers/disabled');
 const populateVideoInfo = require('../../helpers/populateVideoInfo');
 
@@ -22,7 +22,7 @@ exports.before = {
     auth.verifyToken(),
     auth.populateUser(),
     auth.restrictToAuthenticated(),
-    registerUse(),
+    registerUser(),
   ],
   update: [
     disabled(),
