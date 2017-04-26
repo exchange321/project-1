@@ -11,6 +11,7 @@ import videoPage from './videoPageReducer';
 import videoNotes from './videoNotesReducer';
 import videoNote from './videoNoteReducer';
 import favoritePage from './favoritePageReducer';
+import historyPage from './historyPageReducer';
 
 const rootReducer = combineReducers({
   auth,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   videoNotes,
   videoNote,
   favoritePage,
+  historyPage,
   routing: routerReducer,
 });
 

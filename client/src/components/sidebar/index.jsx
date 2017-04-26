@@ -88,9 +88,8 @@ class Sidebar extends Component {
             Search
           </MenuItem>
           <MenuItem
-            onClick={e => this.handleRedirect()}
+            onClick={e => this.handleRedirect('/history')}
             rightIcon={<i className="fa fa-history" aria-hidden="true" />}
-            disabled
           >
             History
           </MenuItem>

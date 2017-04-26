@@ -29,6 +29,7 @@ export const registerVideo = videoId => (
       dispatch(routerActions.replace('/'));
     });
 
+    const userId = getState().auth.user._id;
     const restLink = `${window.location.protocol}//${window.location.hostname}${window.location.port.length > 0 ? `:${window.location.port}` : ''}/video?v=${videoId}`;
     fetch(restLink, {
       method: 'POST',
@@ -37,7 +38,7 @@ export const registerVideo = videoId => (
       },
       body: JSON.stringify({
         v: videoId,
-        userId: getState().auth.user._id,
+        userId,
       }),
     }).then((response) => {
       if (response.status >= 200 && response.status < 300) {
@@ -46,8 +47,7 @@ export const registerVideo = videoId => (
       throw new Error(response.statusText);
     }).then(response => (
       response.json()
-    ))
-    .then(({ url, favorite }) => {
+    )).then(({ url, favorite }) => {
       dispatch({
         type: VIDEO_PAGE_ACTIONS.REGISTER_VIDEO,
         src: url,
@@ -56,8 +56,10 @@ export const registerVideo = videoId => (
         type: VIDEO_PAGE_ACTIONS.SET_FAVORITE_STATE,
         favorite,
       });
-    })
-    .catch((err) => {
+      return app.service('histories').create({
+        videoId,
+      });
+    }).catch((err) => {
       toastr.error(err.message);
       dispatch(routerActions.replace('/'));
     });
@@ -90,7 +92,6 @@ export const createFavorite = () => (
       if (total < 1) {
         return app.service('favorites').create({
           videoId,
-          userId,
         });
       } else {
         return false;

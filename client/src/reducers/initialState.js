@@ -51,4 +51,7 @@ export default {
   favoritePage: {
     favorites: [],
   },
+  historyPage: {
+    histories: [],
+  },
 };

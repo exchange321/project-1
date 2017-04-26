@@ -197,7 +197,7 @@ div.search-bar-container {
   }
 }
 
-div.search-result-container, div.favorites-container {
+div.search-result-container, div.favorites-container, div.histories-container {
   @media (--md-only) {
     display: flex;
     flex-wrap: wrap;

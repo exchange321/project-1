@@ -4,9 +4,9 @@ const globalHooks = require('../../../hooks/index');
 const hooks = require('feathers-hooks');
 const auth = require('feathers-authentication').hooks;
 
-const registerUse = require('./registerUser');
-const disabled = require('./disabled');
-const populateVideoInfo = require('./populateVideoInfo');
+const registerUse = require('../../helpers/registerUser');
+const disabled = require('../../helpers/disabled');
+const populateVideoInfo = require('../../helpers/populateVideoInfo');
 
 exports.before = {
   all: [],
