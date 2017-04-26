@@ -25,10 +25,11 @@
 - [ ] Video Functions
     - [x] Initialize Video Playback
     - [x] Video Controls
-    - [ ] Fetch Video
+    - [x] Fetch Video
         - [x] Download Video on Server
         - [x] Stream Video from Server
         - [x] (New) Store Fetched Video's Info
+        - [x] (New) Capture 3 Frames from Downloaded Videos
     - [ ] Note-taking
         - [x] Frame Capture
         - [x] Input Notes
@@ -41,8 +42,6 @@
     - [ ] WCAG 2.0
     - [ ] On-Screen Instructions
 - [ ] Video Functions
-    - [ ] Fetch Video
-        - [ ] (New) Capture 3 Frames from Downloaded Videos
     - [ ] Note-taking
         - [ ] (New) Print Notes
     
