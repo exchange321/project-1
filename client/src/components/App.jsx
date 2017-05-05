@@ -1,11 +1,13 @@
 /**
  * Created by Wayuki on 24-Mar-17.
  */
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Switch, Route, Redirect } from 'react-router';
+import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import darkThemeBase from 'material-ui/styles/baseThemes/darkBaseTheme';
+import lightThemeBase from 'material-ui/styles/baseThemes/lightBaseTheme';
 
 import Sidebar from './sidebar/index.jsx';
 
@@ -20,33 +22,45 @@ import SearchBar from "./search/searchBar/index.jsx";
 
 import { PageForUserOnly } from '../auth';
 
-const App = ({ location }) => {
-  return (
-    <MuiThemeProvider muiTheme={getMuiTheme(darkThemeBase)}>
-      <div className="app-container">
-        <Sidebar />
-        { location.pathname !== '/login' ? <SearchBar location={location} /> : '' }
-        <Switch>
-          <Route exact path="/" component={PageForUserOnly(SearchPage)} />
-          <Route exact path="/login" render={() => (
-            <LoginPage success={null} />
-          )} />
-          <Route exact path="/login/success" render={() => (
-            <LoginPage success={true} />
-          )} />
-          <Route exact path="/login/failure" render={() => (
-            <LoginPage success={false} />
-          )} />
-          <Route exact path="/watch" component={PageForUserOnly(VideoPage)} />
-          <Route exact path="/favorite" component={PageForUserOnly(FavoritePage)} />
-          <Route exact path="/history" component={PageForUserOnly(HistoryPage)} />
-          {/*<Route exact path="/404" component={NotFoundPage} />*/}
-          {/*<Redirect to="/404" />*/}
-          <Route path="*" component={NotFoundPage} />
-        </Switch>
-      </div>
-    </MuiThemeProvider>
-  );
-};
+@connect(
+  ({ appPage }) => ({
+    ...appPage,
+  }),
+)
+class App extends Component {
+  static propTypes = {
+    darkTheme: PropTypes.bool.isRequired,
+  };
+
+  render() {
+    const { location, darkTheme } = this.props;
+    return (
+      <MuiThemeProvider muiTheme={getMuiTheme(darkTheme ? darkThemeBase : lightThemeBase)}>
+        <div className={`app-container ${darkTheme ? "dark-theme" : "light-theme"}`}>
+          <Sidebar />
+          { location.pathname !== '/login' ? <SearchBar location={location} /> : '' }
+          <Switch>
+            <Route exact path="/" component={PageForUserOnly(SearchPage)} />
+            <Route exact path="/login" render={() => (
+              <LoginPage success={null} />
+            )} />
+            <Route exact path="/login/success" render={() => (
+              <LoginPage success={true} />
+            )} />
+            <Route exact path="/login/failure" render={() => (
+              <LoginPage success={false} />
+            )} />
+            <Route exact path="/watch" component={PageForUserOnly(VideoPage)} />
+            <Route exact path="/favorite" component={PageForUserOnly(FavoritePage)} />
+            <Route exact path="/history" component={PageForUserOnly(HistoryPage)} />
+            {/*<Route exact path="/404" component={NotFoundPage} />*/}
+            {/*<Redirect to="/404" />*/}
+            <Route path="*" component={NotFoundPage} />
+          </Switch>
+        </div>
+      </MuiThemeProvider>
+    )
+  }
+}
 
 export default App;

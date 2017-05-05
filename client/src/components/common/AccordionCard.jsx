@@ -13,7 +13,6 @@ const AccordionCard = ({ parentId, headingId, collapseId, headingText, isDefault
           href={`#${collapseId}`}
           aria-expanded="true"
           aria-controls={collapseId}
-          className="text-white"
         >
           { headingText }
         </a>

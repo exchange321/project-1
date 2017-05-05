@@ -5,6 +5,7 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
 import auth from './authReducer';
+import appPage from './appPageReducer';
 import sidebar from './sidebarReducer';
 import searchPage from './searchPageReducer';
 import videoPage from './videoPageReducer';
@@ -15,6 +16,7 @@ import historyPage from './historyPageReducer';
 
 const rootReducer = combineReducers({
   auth,
+  appPage,
   sidebar,
   searchPage,
   videoPage,

@@ -26,23 +26,35 @@ body {
 /* LIBRARY - START */
 
 :root {
-  --theme-color: rgb(48, 48, 48);
-  --theme-color-2: rgb(60, 60, 60);
-  --thumbnail-color: #aaa;
-  --font-color: white;
+  --dark-theme-color: rgb(48, 48, 48);
+  --dark-theme-color-2: rgb(60, 60, 60);
+  --dark-theme-font-color: white;
+
+  --light-theme-color: white;
+  --light-theme-color-2: #eee;
+  --light-theme-font-color: #333;
+
   --google-color: #008744;
   --facebook-color: #3b5998;
+
+  --dark-theme-box-shadow: {
+    -webkit-box-shadow: 0 0 1rem 0 var(--dark-theme-font-color);
+    -moz-box-shadow: 0 0 1rem 0 var(--dark-theme-font-color);
+    box-shadow: 0 0 1rem 0 var(--dark-theme-font-color);
+  };
+
+  --light-theme-box-shadow: {
+    -webkit-box-shadow: 0 0 1rem 0 var(--light-theme-font-color);
+    -moz-box-shadow: 0 0 1rem 0 var(--light-theme-font-color);
+    box-shadow: 0 0 1rem 0 var(--light-theme-font-color);
+  };
+
   --scale: {
     -webkit-transform: scale(1.03);
     -moz-transform: scale(1.03);
     -ms-transform: scale(1.03);
     -o-transform: scale(1.03);
     transform: scale(1.03);
-  };
-  --box-shadow: {
-    -webkit-box-shadow: 0 0 1rem 0 var(--font-color);
-    -moz-box-shadow: 0 0 1rem 0 var(--font-color);
-    box-shadow: 0 0 1rem 0 var(--font-color);
   };
   --transition-all: {
     -webkit-transition: all .3s;
@@ -91,12 +103,119 @@ img.img-responsive {
 
 /* LIBRARY - END */
 
+/* THEME - START */
+
+div.app-container {
+  &.dark-theme {
+    background-color: var(--dark-theme-color);
+    color: var(--dark-theme-font-color);
+    & .sidebar {
+      & button.btn-toggle {
+        background-color: transparent;
+        color: var(--dark-theme-font-color);
+        &:hover {
+          background-color: var(--dark-theme-font-color);
+          color: var(--dark-theme-color);
+        }
+      }
+    }
+    & .search-bar-container {
+      background-color: var(--dark-theme-color);
+    }
+    & .search-result-container, & .favorites-container, & .histories-container {
+      & .list-result {
+        background-color: var(--dark-theme-color);
+        &:hover {
+          @apply (--dark-theme-box-shadow);
+        }
+      }
+    }
+    & .video {
+      & #video-accordion {
+        & .cards {
+          @apply (--dark-theme-box-shadow);
+          & .card {
+            background-color: transparent;
+            & .card-header {
+              background-color: var(--dark-theme-color-2);
+              & h5 {
+                & a {
+                  color: var(--dark-theme-font-color);
+                }
+              }
+            }
+          }
+        }
+      }
+      & .video-notes-container {
+        & .video-note-container {
+          background-color: var(--dark-theme-color);
+          &:hover {
+            @apply (--dark-theme-box-shadow);
+          }
+        }
+      }
+    }
+  }
+  &.light-theme {
+    background-color: var(--light-theme-color);
+    color: var(--light-theme-font-color);
+    & .sidebar {
+      & button.btn-toggle {
+        background-color: transparent;
+        color: var(--light-theme-font-color);
+        &:hover {
+          background-color: var(--light-theme-font-color);
+          color: var(--light-theme-color);
+        }
+      }
+    }
+    & .search-bar-container {
+      background-color: var(--light-theme-color);
+    }
+    & .search-result-container, & .favorites-container, & .histories-container {
+      & .list-result {
+        background-color: var(--light-theme-color);
+        &:hover {
+          @apply (--light-theme-box-shadow);
+        }
+      }
+    }
+    & .video {
+      & #video-accordion {
+        & .cards {
+          @apply (--light-theme-box-shadow);
+          & .card {
+            background-color: transparent;
+            & .card-header {
+              background-color: var(--light-theme-color-2);
+              & h5 {
+                & a {
+                  color: var(--light-theme-font-color);
+                }
+              }
+            }
+          }
+        }
+      }
+      & .video-notes-container {
+        & .video-note-container {
+          background-color: var(--light-theme-color);
+          &:hover {
+            @apply (--light-theme-box-shadow);
+          }
+        }
+      }
+    }
+  }
+}
+
+/* THEME - END */
+
 /* CONTAINER - START */
 
 div.app-container {
   min-height: 100vh;
-  background-color: var(--theme-color);
-  color: var(--font-color);
   position: relative;
   padding-bottom: 3rem;
 }
@@ -110,14 +229,6 @@ div.sidebar {
   z-index: 15;
   top: 2rem;
   left: -1.5rem;
-  & button.btn-toggle {
-    background-color: transparent;
-    color: var(--font-color);
-    &:hover {
-      background-color: var(--font-color);
-      color: var(--theme-color);
-    }
-  }
   & i.fa {
     font-size: 1.5rem;
   }
@@ -134,7 +245,6 @@ div.search-bar-container {
   left: 0;
   height: 100%;
   z-index: 10;
-  background-color: var(--theme-color);
   @apply (--transition-all);
   &.has-results {
     height: 6.5rem;
@@ -207,7 +317,6 @@ div.search-result-container, div.favorites-container, div.histories-container {
     position: relative;
     overflow: hidden;
     padding: 15px;
-    background-color: var(--theme-color);
     border-radius: 5px;
     @apply (--transition-all);
     @media (--md-only) {
@@ -215,7 +324,6 @@ div.search-result-container, div.favorites-container, div.histories-container {
     }
     &:hover {
       @apply (--scale);
-      @apply (--box-shadow);
       z-index: 2;
       cursor: pointer;
     }
@@ -337,14 +445,7 @@ div.video {
   & #video-accordion {
     padding-top: 2rem;
     & .cards {
-      @apply (--box-shadow);
       border-radius: 5px;
-      & .card {
-        background-color: transparent;
-        & .card-header {
-          background-color: var(--theme-color-2);
-        }
-      }
     }
   }
   & .video-notes-container {
@@ -353,12 +454,10 @@ div.video {
       z-index: 1;
       position: relative;
       overflow: hidden;
-      background-color: var(--theme-color);
       border-radius: 5px;
       @apply (--transition-all);
       &:hover {
         @apply (--scale);
-        @apply (--box-shadow);
         z-index: 2;
         cursor: pointer;
       }

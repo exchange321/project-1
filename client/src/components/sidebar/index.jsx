@@ -11,16 +11,19 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 
 import * as authActions from '../../actions/authActions';
+import * as appPageActions from '../../actions/appPageActions';
 import * as sidebarActions from '../../actions/sidebarActions';
 
 import { ElementForUserOnly } from '../../auth';
 
 @connect(
-  ({ sidebar }) => ({
+  ({ sidebar, appPage }) => ({
     ...sidebar,
+    ...appPage,
   }),
   dispatch => ({
     actions: bindActionCreators(sidebarActions, dispatch),
+    appPageActions: bindActionCreators(appPageActions, dispatch),
     authActions: bindActionCreators(authActions, dispatch),
     routerActions: bindActionCreators(routerActions, dispatch),
   }),
@@ -29,9 +32,13 @@ import { ElementForUserOnly } from '../../auth';
 class Sidebar extends Component {
   static propTypes = {
     open: PropTypes.bool.isRequired,
+    darkTheme: PropTypes.bool.isRequired,
     actions: PropTypes.shape({
       toggle: PropTypes.func.isRequired,
       set: PropTypes.func.isRequired,
+    }).isRequired,
+    appPageActions: PropTypes.shape({
+      toggleTheme: PropTypes.func.isRequired,
     }).isRequired,
     authActions: PropTypes.shape({
       logout: PropTypes.func.isRequired,
@@ -66,8 +73,28 @@ class Sidebar extends Component {
     }
   };
 
+  handleThemeToggle = () => {
+    const {
+      actions: {
+        set,
+      },
+      appPageActions: {
+        toggleTheme,
+      },
+    } = this.props;
+    set(false);
+    toggleTheme();
+  };
+
   render() {
-    const { open, actions: { toggle, set }}  = this.props;
+    const {
+      open,
+      darkTheme,
+      actions: {
+        toggle,
+        set,
+      },
+    }  = this.props;
     return (
       <div className="sidebar">
         <button className="btn btn-secondary btn-toggle" onClick={toggle}>
@@ -75,7 +102,7 @@ class Sidebar extends Component {
         </button>
         <Drawer
           docked={false}
-          width={200}
+          width={300}
           open={open}
           onRequestChange={open => set(open)}
         >
@@ -98,6 +125,12 @@ class Sidebar extends Component {
             rightIcon={<i className="fa fa-heart" aria-hidden="true" />}
           >
             Favorite
+          </MenuItem>
+          <MenuItem
+            onClick={this.handleThemeToggle}
+            rightIcon={<i className="fa fa-paint-brush" aria-hidden="true" />}
+          >
+            { darkTheme ? "Light Theme" : "Dark Theme" }
           </MenuItem>
           <MenuItem
             onClick={e => this.handleRedirect('/login', true)}

@@ -2,6 +2,9 @@
  * Created by Wayuki on 24-Mar-17.
  */
 export default {
+  appPage: {
+    darkTheme: localStorage.getItem("darkTheme") || false,
+  },
   sidebar: {
     open: false,
   },
