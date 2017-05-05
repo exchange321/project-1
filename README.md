@@ -13,6 +13,7 @@
 - [ ] General Functions
     - [x] User Authentication (Google and Facebook)
     - [x] Page and Element Authorization
+    - [x] On-Screen Instructions
 - [x] Search Functions
     - [x] Search Bar
         - [x] Initialize Search Bar
@@ -40,7 +41,6 @@
 ## Todos
 - [ ] General Functions
     - [ ] WCAG 2.0
-    - [ ] On-Screen Instructions
 - [ ] Video Functions
     - [ ] Note-taking
         - [ ] (New) Print Notes
