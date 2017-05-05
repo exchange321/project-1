@@ -8,6 +8,8 @@ import { routerMiddleware } from 'react-router-redux';
 
 import createHistory from 'history/createBrowserHistory';
 
+import { middleware as idleMiddleware } from '../idle-monitor';
+
 import rootReducer from '../reducers';
 
 export const history = createHistory();
@@ -17,7 +19,7 @@ const configureStore = initialState => (
     rootReducer,
     initialState,
     compose(
-      applyMiddleware(thunk, reduxPromiseMiddleware(), routerMiddleware(history)),
+      applyMiddleware(thunk, idleMiddleware, reduxPromiseMiddleware(), routerMiddleware(history)),
       window.devToolsExtension ? window.devToolsExtension() : f => f,
     ),
   )

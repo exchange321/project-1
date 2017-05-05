@@ -3,7 +3,9 @@
  */
 export default {
   appPage: {
-    darkTheme: localStorage.getItem("darkTheme") || false,
+    darkTheme: !!localStorage.getItem("darkTheme") || false,
+    stage: 0,
+    pathname: '',
   },
   sidebar: {
     open: false,

@@ -3,6 +3,7 @@
  */
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
+import { reducer as idle } from '../idle-monitor';
 
 import auth from './authReducer';
 import appPage from './appPageReducer';
@@ -15,6 +16,7 @@ import favoritePage from './favoritePageReducer';
 import historyPage from './historyPageReducer';
 
 const rootReducer = combineReducers({
+  idle,
   auth,
   appPage,
   sidebar,

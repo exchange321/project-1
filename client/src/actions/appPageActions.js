@@ -19,4 +19,9 @@ export const toggleTheme = () => (
   }
 );
 
+export const setStage = (stage) => ({
+  type: APP_PAGE_ACTIONS.SET_STAGE,
+  stage,
+});
+
 export default () => {};

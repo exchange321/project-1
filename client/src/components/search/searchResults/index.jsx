@@ -9,8 +9,9 @@ import { routerActions } from 'react-router-redux';
 import ListResult from '../../common/ListResult.jsx';
 
 @connect(
-  ({ searchPage: { results } }) => ({
+  ({ searchPage: { results }, appPage: { stage } }) => ({
     results,
+    idle: stage === 2,
   }),
   dispatch => ({
     routerActions: bindActionCreators(routerActions, dispatch),
@@ -32,6 +33,7 @@ class SearchResults extends Component {
         }).isRequired,
       }).isRequired,
     })).isRequired,
+    idle: PropTypes.bool.isRequired,
     routerActions: PropTypes.shape({
       push: PropTypes.func.isRequired,
     }).isRequired,
@@ -49,13 +51,13 @@ class SearchResults extends Component {
   };
 
   render() {
-    const { results } = this.props;
+    const { results, idle } = this.props;
     return (
       <div className="search-result-container page clearfix">
         { results.map((result, key) => (
           <ListResult
             key={key}
-            className={`clear-${key % 2}`}
+            className={`clear-${key % 2} ${key === 0 && idle ? 'idle' : ''}`}
             {...(this.getInfoFromResult(result))}
             usePreview={false}
             handleResultClick={this.handleSearchResultClick}

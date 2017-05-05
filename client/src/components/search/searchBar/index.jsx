@@ -14,11 +14,24 @@ import { setCaretToPos, checkOverflown } from '../../../../../helpers';
 import { ElementForUserOnly } from '../../../auth';
 
 @connect(
-  ({ searchPage: { query, words, results, spelling } }) => ({
+  (
+    {
+      searchPage: {
+        query,
+        words,
+        results,
+        spelling,
+      },
+      appPage: {
+        stage,
+      },
+    }
+   ) => ({
     query,
     words,
     spelling,
     numResults: results.length,
+    idle: stage === 1,
   }),
   dispatch => ({
     actions: bindActionCreators(searchPageActions, dispatch),
@@ -34,6 +47,7 @@ class SearchBar extends Component {
     query: PropTypes.string.isRequired,
     words: PropTypes.arrayOf(PropTypes.element).isRequired,
     numResults: PropTypes.number.isRequired,
+    idle: PropTypes.bool.isRequired,
     spelling: PropTypes.shape({
       show: PropTypes.bool.isRequired,
       wordPos: PropTypes.number.isRequired,
@@ -145,6 +159,7 @@ class SearchBar extends Component {
       query,
       words,
       numResults,
+      idle,
       spelling: {
         show,
         wordPos,
@@ -156,7 +171,10 @@ class SearchBar extends Component {
     return (
       <div className={`search-bar-container ${(numResults > 0 || location.pathname !== '/') ? 'has-results' : ''}`}>
         <div className="search-bar container">
-          <form onSubmit={this.handleQuerySubmit}>
+          <form
+            className={`search-bar-form ${idle ? 'idle' : ''}`}
+            onSubmit={this.handleQuerySubmit}
+          >
             <div className="search-bar-inner input-group">
               <span className="input-group-addon">How to</span>
               <div

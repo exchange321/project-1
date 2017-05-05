@@ -82,6 +82,44 @@ body {
     -o-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
   };
+  --idle-box-shadow: {
+    -webkit-box-shadow: 0 0 5rem 0 green !important;
+    -moz-box-shadow: 0 0 5rem 0 green !important;
+    box-shadow: 0 0 5rem 0 green !important;
+  };
+}
+
+@keyframes idleBlinker {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 transparent;
+    -moz-box-shadow: 0 0 0 0 transparent;
+    box-shadow: 0 0 0 0 transparent;
+  }
+  50% {
+    -webkit-box-shadow: 0 0 5rem 0 green;
+    -moz-box-shadow: 0 0 5rem 0 green;
+    box-shadow: 0 0 5rem 0 green;
+  }
+  100% {
+    -webkit-box-shadow: 0 0 0 0 transparent;
+    -moz-box-shadow: 0 0 0 0 transparent;
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+@keyframes arrowIdleBlinker {
+  0% {
+    opacity: 0;
+    text-shadow: 0 0 0 transparent;
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 3rem green;
+  }
+  100% {
+    opacity: 0;
+    text-shadow: 0 0 0 transparent;
+  }
 }
 
 img.img-responsive {
@@ -246,6 +284,15 @@ div.search-bar-container {
   height: 100%;
   z-index: 10;
   @apply (--transition-all);
+  & form.search-bar-form {
+    @apply (--transition-all);
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    &.idle {
+      animation: idleBlinker 1s linear infinite;
+    }
+  }
   &.has-results {
     height: 6.5rem;
     & .search-bar {
@@ -327,6 +374,10 @@ div.search-result-container, div.favorites-container, div.histories-container {
       z-index: 2;
       cursor: pointer;
     }
+    &.idle {
+      z-index: 2;
+      animation: idleBlinker 1s linear infinite;
+    }
     & .thumbnail {
       text-align: center;
       @media (--xs-md) {
@@ -371,6 +422,21 @@ div.search-result-container, div.favorites-container, div.histories-container {
           text-align: center;
         }
       }
+    }
+  }
+}
+
+div.search {
+  & .idleMask {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    text-align: right;
+    z-index: 10;
+    & i {
+      color: green;
+      font-size: 5rem;
+      animation: arrowIdleBlinker 1s linear infinite;
     }
   }
 }

@@ -13,6 +13,13 @@ const appPageReducer = (state = initialState.appPage, action) => {
       };
     }
 
+    case APP_PAGE_ACTIONS.SET_STAGE: {
+      return {
+        ...state,
+        stage: action.stage,
+      };
+    }
+
     default: {
       return state;
     }

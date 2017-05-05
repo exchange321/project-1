@@ -4,6 +4,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Switch, Route, Redirect } from 'react-router';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actions as idleActions } from '../idle-monitor';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import darkThemeBase from 'material-ui/styles/baseThemes/darkBaseTheme';
@@ -22,18 +24,40 @@ import SearchBar from "./search/searchBar/index.jsx";
 
 import { PageForUserOnly } from '../auth';
 
+import * as appPageActions from '../actions/appPageActions';
+
 @connect(
   ({ appPage }) => ({
     ...appPage,
+  }),
+  dispatch => ({
+    actions: bindActionCreators(appPageActions, dispatch),
+    idleActions: bindActionCreators(idleActions, dispatch),
   }),
 )
 class App extends Component {
   static propTypes = {
     darkTheme: PropTypes.bool.isRequired,
+    idleActions: PropTypes.shape({
+      start: PropTypes.func.isRequired,
+      stop: PropTypes.func.isRequired,
+    }).isRequired,
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.pathname === '/' && this.props.location.pathname !== '/') {
+      this.props.idleActions.start();
+    }
+    if (nextProps.location.pathname !== '/' && this.props.location.pathname === '/') {
+      this.props.idleActions.stop();
+    }
+  }
+
   render() {
-    const { location, darkTheme } = this.props;
+    const {
+      location,
+      darkTheme,
+    } = this.props;
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(darkTheme ? darkThemeBase : lightThemeBase)}>
         <div className={`app-container ${darkTheme ? "dark-theme" : "light-theme"}`}>
