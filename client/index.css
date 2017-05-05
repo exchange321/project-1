@@ -301,10 +301,6 @@ div.video {
           @apply (--transition-all);
           position: absolute;
           right: .5rem;
-          opacity: 0;
-          &.mouse-moved {
-            opacity: 1;
-          }
           &.screenshot-container {
             top: .5rem;
           }

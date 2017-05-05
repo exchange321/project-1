@@ -38,49 +38,12 @@ class VideoPlayer extends Component {
     }).isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    this.mousemoveCooldown = null;
-    this.state = {
-      mouseMoving: false,
-    };
-  }
-
-  componentDidMount() {
-    $(".video-container").mousemove(() => {
-      this.setState({
-        mouseMoving: true,
-      });
-      if (!this.mousemoveCooldown) {
-        this.mousemoveCooldown = setTimeout(() => {
-          this.setState({
-            mouseMoving: false,
-          });
-          clearTimeout(this.mousemoveCooldown);
-          this.mousemoveCooldown = null;
-        }, 3000);
-      }
-    }).mouseleave(() => {
-      this.setState({
-        mouseMoving: false,
-      });
-      clearTimeout(this.mousemoveCooldown);
-      this.mousemoveCooldown = null;
-    });
-  }
-
   componentWillReceiveProps(nextProps) {
     if (this.props.showModal && !nextProps.showModal) {
       if (this.props.videoEl.duration !== this.props.videoEl.currentTime) {
         this.props.videoEl.play();
       }
     }
-  }
-
-  componentWillUnmount() {
-    $('.video-container').unbind('mousemove').unbind('mouseleave');
-    clearTimeout(this.mousemoveCooldown);
-    this.mousemoveCooldown = null;
   }
 
   handleNoteTakingButtonClick = () => {
@@ -112,20 +75,17 @@ class VideoPlayer extends Component {
       favorite,
       ...restProps
     } = this.props;
-    const {
-      mouseMoving,
-    } = this.state;
     return (
       <div className="video-container">
         <video {...restProps}>
           { children }
         </video>
-        <div className={`over-screen screenshot-container ${mouseMoving ? "mouse-moved" : ""}`}>
+        <div className={`over-screen screenshot-container`}>
           <button onClick={this.handleNoteTakingButtonClick} className="btn btn-outline-primary btn-lg">
             <i className="fa fa-sticky-note" />
           </button>
         </div>
-        <div className={`over-screen favorite-container ${mouseMoving ? "mouse-moved" : ""}`}>
+        <div className={`over-screen favorite-container`}>
           <button onClick={handleFavoriteButtonClick} className={`btn btn-outline-danger btn-lg ${favorite ? 'active' : ''}`}>
             <i className="fa fa-heart" aria-hidden="true" />
           </button>
