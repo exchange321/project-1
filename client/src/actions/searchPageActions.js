@@ -112,6 +112,12 @@ export const handleApplyingSuggestion = (wordPos, word) => (
       query,
     } = getState().searchPage;
     const words = dissembleSentence(query);
+
+    app.service('spellCorrectionHistories').create({
+      userWord: words[wordPos],
+      fixedWord: word,
+    }).catch();
+
     words[wordPos] = word;
     const left = words.slice(0, wordPos + 1).join('');
     const newCaretPosition = left.length;
