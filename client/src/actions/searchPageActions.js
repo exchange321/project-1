@@ -35,8 +35,9 @@ export const handleQueryChange = value => (
 
 export const handleQuerySubmit = () => (
   (dispatch, getState) => new Promise((resolve, reject) => {
-    const { query } = getState().searchPage;
+    let { query } = getState().searchPage;
     if (query.length > 0) {
+      query = `How to ${query}`;
       search(query).then((results) => {
         app.service('searchHistories').create({
           query,
