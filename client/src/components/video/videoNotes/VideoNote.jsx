@@ -14,9 +14,11 @@ const VideoNote = ({ onNoteClick, _id, imgUrl, title, note }) => (
           <img src={imgUrl} alt={title} className="img-fluid" />
         </div>
       </div>
-      <div className="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
-        <p className="lead">{ title }</p>
-        <p>{ note }</p>
+      <div className="note-content col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
+        <div className="note-content-inner">
+          <p className="lead note-title">{ title }</p>
+          <p className="note-note">{ note }</p>
+        </div>
       </div>
     </div>
   </div>

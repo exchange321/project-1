@@ -139,6 +139,16 @@ img.img-responsive {
   background-color: #ddd;
 }
 
+button.btn-custom {
+  width: 4rem;
+  text-align: center;
+  padding: 1rem;
+  border-width: 2px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 /* LIBRARY - END */
 
 /* THEME - START */
@@ -481,15 +491,6 @@ div.video {
           &.favorite-container {
             top: 5rem;
           }
-          & button {
-            width: 4rem;
-            text-align: center;
-            padding: 1rem;
-            border-width: 2px;
-            &:hover {
-              cursor: pointer;
-            }
-          }
         }
       }
       & .video-preloader {
@@ -515,6 +516,7 @@ div.video {
     }
   }
   & .video-notes-container {
+    padding-top: 1rem;
     & .video-note-container {
       padding: 1rem;
       z-index: 1;
