@@ -4,7 +4,7 @@
 import * as IDLE_STATUSES from './idleStatus';
 import { setStage } from '../actions/appPageActions';
 
-export const idleStatusDelay = idleStatus => () => {
+export const idleStatusDelay = idleStatus => () => { // eslint-disable-line consistent-return
   if (idleStatus === IDLE_STATUSES.STAGE_1) {
     return 5000;
   }

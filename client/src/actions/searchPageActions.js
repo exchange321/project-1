@@ -74,17 +74,21 @@ export const handleInputBoxFocus = caretPosition => (
         const spelling = getWordSuggestion(word);
         if (!spelling.found && spelling.suggestions.length > 0) {
           const suggestions = spelling.suggestions.map((suggestion) => {
+            let emojiChar = null;
             const { score, emoji } = getEmoji(suggestion.word);
-            if(score >= 1) {
-              suggestion.emoji = emoji.char;
+            if (score >= 1) {
+              emojiChar = emoji.char;
             }
-            return suggestion;
+            return {
+              ...suggestion,
+              emoji: emojiChar,
+            };
           });
           dispatch(registerSpellingSuggestions({
             show: true,
             wordPos,
             pos: window.$(`.${wordClass}`).position().left,
-            suggestions: spelling.suggestions,
+            suggestions,
           }));
         } else {
           dispatch(registerSpellingSuggestions({

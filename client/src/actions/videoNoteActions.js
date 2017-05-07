@@ -3,7 +3,7 @@
  */
 import { VIDEO_NOTE_ACTIONS } from './actionTypes';
 import app from '../feathers';
-import { createFavorite } from './videoPageActions'
+import { createFavorite } from './videoPageActions';
 
 export const handleModalToggle = () => ({
   type: VIDEO_NOTE_ACTIONS.HANDLE_MODAL_TOGGLE,
@@ -64,11 +64,13 @@ export const handleFormSubmit = () => (
       };
       app.service('notes').create(request).then(() => (
         dispatch(createFavorite())
-      )).then(() => {
-        resolve();
-      }).catch((err) => {
-        reject(err);
-      });
+      ))
+        .then(() => {
+          resolve();
+        })
+        .catch((err) => {
+          reject(err);
+        });
     }
   })
 );
