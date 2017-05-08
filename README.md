@@ -10,7 +10,7 @@
         - [x] SearchPage
         - [x] VideoPage
         - [x] LoginPage
-- [ ] General Functions
+- [x] General Functions
     - [x] User Authentication (Google and Facebook)
     - [x] Page and Element Authorization
     - [x] On-Screen Instructions
@@ -31,19 +31,13 @@
         - [x] Stream Video from Server
         - [x] (New) Store Fetched Video's Info
         - [x] (New) Capture 3 Frames from Downloaded Videos
-    - [ ] Note-taking
+    - [x] Note-taking
         - [x] Frame Capture
         - [x] Input Notes
         - [x] Store Notes on Server
+        - [x] (New) Print Notes
     - [x] Favorite
     - [x] Playback History
-
-## Todos
-- [ ] General Functions
-    - [ ] WCAG 2.0
-- [ ] Video Functions
-    - [ ] Note-taking
-        - [ ] (New) Print Notes
     
 ## Removed
 - [ ] General Functions
