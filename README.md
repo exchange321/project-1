@@ -23,7 +23,7 @@
     - [x] Search Result
         - [x] Initialize Search Result
         - [x] Display Information
-- [ ] Video Functions
+- [x] Video Functions
     - [x] Initialize Video Playback
     - [x] Video Controls
     - [x] Fetch Video
