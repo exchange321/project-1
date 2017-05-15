@@ -80,12 +80,12 @@ class VideoPlayer extends Component {
         <video {...restProps}>
           { children }
         </video>
-        <div className={`over-screen screenshot-container`}>
+        <div title="Take Note" className={`over-screen screenshot-container`}>
           <button onClick={this.handleNoteTakingButtonClick} className="btn btn-outline-primary btn-custom btn-lg">
             <i className="fa fa-sticky-note" />
           </button>
         </div>
-        <div className={`over-screen favorite-container`}>
+        <div title={favorite ? "Unset Favorite" : "Set Favorite"} className={`over-screen favorite-container`}>
           <button onClick={handleFavoriteButtonClick} className={`btn btn-outline-danger btn-lg btn-custom ${favorite ? 'active' : ''}`}>
             <i className="fa fa-heart" aria-hidden="true" />
           </button>

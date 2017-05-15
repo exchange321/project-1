@@ -207,7 +207,7 @@ class SearchBar extends Component {
                 }
               </div>
               <span className="input-group-btn">
-                  <button type="submit" className="btn btn-secondary btn-search-submit"><i className="fa fa-search" /></button>
+                  <button type="submit" className="btn btn-secondary btn-search-submit"><i className="fa fa-search" /> Search</button>
               </span>
             </div>
           </form>

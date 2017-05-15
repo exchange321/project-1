@@ -161,7 +161,7 @@ class VideoNotes extends Component {
                   className="btn btn-outline-primary btn-lg btn-custom"
                   onClick={this.handlePrintNote}
                 >
-                  <i className="fa fa-print" aria-hidden="true" />
+                  <i className="fa fa-print" aria-hidden="true" /> <span>Print Notes</span>
                 </button>
               </div>
               <div className="video-notes-container">

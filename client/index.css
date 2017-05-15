@@ -140,7 +140,6 @@ img.img-responsive {
 }
 
 button.btn-custom {
-  width: 4rem;
   text-align: center;
   padding: 1rem;
   border-width: 2px;
@@ -502,8 +501,12 @@ div.video {
         & .preloader {
           @apply (--absolute-center);
           text-align: center;
+          max-height: 95%;
           & .ajax-loader {
+            width: 50%;
+            height: 50%;
             margin-bottom: 1rem;
+            color: white;
           }
         }
       }
