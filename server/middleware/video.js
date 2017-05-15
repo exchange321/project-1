@@ -70,7 +70,7 @@ const recordVideo = (app, req, res, videos, videoInfo, userId, videoId) => {
   ffmpeg(path.join(__dirname, '..', '..', 'assets', 'videos', videoInfo.filename)).on('error', (err) => {
     console.log(err.message);
   }).on('filenames', (filenames) => {
-    videoInfo.preview = filenames.map((filename) => `${req.protocol}://${app.get('host')}:${app.get('port')}/assets/previews/${filename}`)
+    videoInfo.preview = filenames.map((filename) => `${req.protocol}://${app.get('realhost')}:${app.get('realport')}/assets/previews/${filename}`)
     videos.create(videoInfo).then(() => {
       responseUrl(app, req, res, videoInfo.filename, userId, videoId);
     }).catch(() => {
@@ -92,7 +92,7 @@ const responseUrl = (app, req, res, filename, userId, videoId) => {
   }).then(({ total }) => {
     res.status(200);
     res.json({
-      url: `${req.protocol}://${app.get('host')}:${app.get('port')}/assets/videos/${filename}`,
+      url: `${req.protocol}://${app.get('realhost')}:${app.get('realport')}/assets/videos/${filename}`,
       favorite: total > 0,
     });
   }).catch(() => {

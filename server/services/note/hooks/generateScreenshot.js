@@ -25,7 +25,7 @@ module.exports = function() {
       const filePath = path.join(__dirname, '..', '..', '..', '..', 'assets', 'screenshots', imageFileName);
       imageDataUri.outputFile(imgUrl, filePath).then((res) => {
         hook.data = Object.assign({}, hook.data, {
-          imgUrl: `http://${hook.app.get('host')}:${hook.app.get('port')}/assets/screenshots/${imageFileName}`,
+          imgUrl: `http://${hook.app.get('realhost')}:${hook.app.get('realport')}/assets/screenshots/${imageFileName}`,
           filePath: res,
         });
         resolve(hook);
