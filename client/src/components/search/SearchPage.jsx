@@ -9,7 +9,8 @@ import { routerActions } from 'react-router-redux';
 import SearchResults from './searchResults/index.jsx';
 
 @connect(
-  ({ appPage: { stage } }) => ({
+  ({ appPage: { stage }, searchPage: { results } }) => ({
+    hasResult: results.length > 0,
     idle: stage === 3,
   }),
   dispatch => ({
@@ -18,6 +19,7 @@ import SearchResults from './searchResults/index.jsx';
 )
 class SearchPage extends Component {
   static propTypes = {
+    hasResult: PropTypes.bool.isRequired,
     idle: PropTypes.bool.isRequired,
     routerActions: PropTypes.shape({
       replace: PropTypes.func.isRequired,
@@ -34,12 +36,12 @@ class SearchPage extends Component {
   }
 
   render() {
-    const { idle } = this.props;
+    const { idle, hasResult } = this.props;
     return (
       <div className="search container">
         <SearchResults />
         {
-          idle ? (
+          hasResult && idle ? (
             <div className="idleMask">
               <i className="fa fa-arrow-down" aria-hidden="true" />
             </div>
