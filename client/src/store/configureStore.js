@@ -20,7 +20,6 @@ const configureStore = initialState => (
     initialState,
     compose(
       applyMiddleware(thunk, idleMiddleware, reduxPromiseMiddleware(), routerMiddleware(history)),
-      window.devToolsExtension ? window.devToolsExtension() : f => f,
     ),
   )
 );
